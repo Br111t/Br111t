@@ -7,7 +7,7 @@
   <!-- profile views -->
   <img src="https://komarev.com/ghpvc/?username=Br111t&style=flat-square" alt="profile views"/>
 
-  <!-- LinkedIn badge -->
+  <!-- LinkedIn badge (image = no underline) -->
   <a href="https://www.linkedin.com/in/1blb/">
     <img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/>
   </a>
@@ -17,6 +17,7 @@
     <img src="https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main&event=push" alt="Agent-Ops CI"/>
   </a>
 </p>
+
 
 
 
