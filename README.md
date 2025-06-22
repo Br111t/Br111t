@@ -7,8 +7,6 @@
 <p align="center">
   <!-- visitor counter -->
   <img src="https://komarev.com/ghpvc/?username=Br111t&style=flat-square" alt="profile views" />
-  <!-- latest-blog badge (example uses dev.to; swap for your source) -->
-  <img src="https://img.shields.io/badge/blog-latest-blue?logo=ghost" alt="latest blog post"/>
   <!-- LinkedIn -->
   <a href="https://www.linkedin.com/in/1blb/">
     <img src="https://img.shields.io/badge/LinkedIn-Connect-informational?logo=linkedin" alt="LinkedIn"/>
