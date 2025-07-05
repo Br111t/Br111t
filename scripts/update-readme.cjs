@@ -1,6 +1,6 @@
 const fs = require("fs");
 const https = require("https");
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 const repos = [
   {
@@ -60,7 +60,6 @@ async function getRepoMetadata(repoName) {
   }
 }
 
-
 function getActivityStatus(lastRunDate) {
   if (!lastRunDate) return "❌ No Data";
   const now = new Date();
@@ -92,12 +91,6 @@ function getLanguageEmoji(language) {
   return map[language] || "";
 }
 
-
-function formatStars(stars) {
-  return stars === 0 ? "🆕 0" : stars;
-}
-
-
 function checkBadgeExists(badgeUrl) {
   return new Promise((resolve) => {
     https
@@ -127,8 +120,18 @@ async function buildTable() {
     })
   );
 
-  const tableHeader = `| Project | CI Status | Activity | ⭐ Stars | 🧠 Language |
-|---------|-----------|----------|---------|-------------|`;
+  const hasStars = enrichedRepos.some(repo => repo.stars > 0);
+
+  function formatStars(stars, lastCommit) {
+    const now = new Date();
+    const ageInMonths = lastCommit ? (now - lastCommit) / (1000 * 60 * 60 * 24 * 30) : null;
+    if (stars === 0 && ageInMonths !== null && ageInMonths < 2) return "🆕 0";
+    if (stars === 0) return "";
+    return `⭐ ${stars}`;
+  }
+
+  const tableHeader = `| Project | CI Status | Activity |${hasStars ? " ⭐ Stars |" : ""} 🧠 Language |
+|---------|-----------|----------|${hasStars ? "---------|" : ""}-------------|`;
 
   const tableRows = enrichedRepos
     .sort((a, b) => {
@@ -143,7 +146,9 @@ async function buildTable() {
       return a.name.localeCompare(b.name);
     })
     .map(repo =>
-      `| [${repo.name}](${repo.url}) | ${repo.ciStatus} | ${repo.activity} | ${formatStars(repo.stars)} | ${getLanguageEmoji(repo.language)} ${repo.language} |`
+      `| [${repo.name}](${repo.url}) | ${repo.ciStatus} | ${repo.activity} |${
+        hasStars ? ` ${formatStars(repo.stars, repo.lastCommit)} |` : ""
+      } ${getLanguageEmoji(repo.language)} ${repo.language} |`
     )
     .join("\n");
 
@@ -163,4 +168,3 @@ ${tableRows}
 }
 
 buildTable();
-
