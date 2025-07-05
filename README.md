@@ -25,12 +25,12 @@
 
 #### 📋 CI Status Dashboard
 <!-- CI-BADGE-START -->
-| Project | CI Status | Activity |
-|---------|-----------|----------|
-| [agent-ops](https://github.com/Br111t/agent-ops) | ![CI](https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main) | 🟢 Active |
-| [finrisk-sim-svc](https://github.com/Br111t/finrisk-sim-svc) | 🚧 Pending | 🟢 Active |
-| [wellsrag-advisor](https://github.com/Br111t/wellsrag-advisor) | 🚧 Pending | 🟢 Active |
-| [notebook-to-prod-template](https://github.com/Br111t/notebook-to-prod-template) | ![CI](https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main) | 🔥 Heating Up |
+| Project | CI Status | Activity | ⭐ Stars | 🧠 Language |
+|---------|-----------|----------|---------|-------------|
+| [notebook-to-prod-template](https://github.com/Br111t/notebook-to-prod-template) | ![CI](https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main) | 🔥 Heating Up | 🆕 0 | 📓 Jupyter Notebook |
+| [finrisk-sim-svc](https://github.com/Br111t/finrisk-sim-svc) | 🚧 Pending | 🟢 Active | 🆕 0 |  — |
+| [wellsrag-advisor](https://github.com/Br111t/wellsrag-advisor) | 🚧 Pending | 🟢 Active | 🆕 0 |  — |
+| [agent-ops](https://github.com/Br111t/agent-ops) | ![CI](https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main) | 🟢 Active | 🆕 0 | 🐍 Python |
 <!-- CI-BADGE-END -->
 
 > 🔥 Heating Up (commits within 7 days)  
