@@ -22,8 +22,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run update-readme.js
-        run: node scripts/update-readme.js
+      - name: Run update-readme.cjs
+        run: node scripts/update-readme.cjs
 
       - name: Commit and push if changed
         run: |
