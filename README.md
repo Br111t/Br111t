@@ -15,10 +15,7 @@
 ---
 <p align="center">
 <!-- CI-BADGE-START -->
-| Project | CI Status |
-|---------|-----------|
-| [notebook-to-prod-template](https://github.com/Br111t/notebook-to-prod-template) | ![CI](https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main) |
-| [agent-ops](https://github.com/Br111t/agent-ops) | ![CI](https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main) |
+<!-- Auto-generated badge table -->
 <!-- CI-BADGE-END -->
 </p>
 
