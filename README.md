@@ -23,6 +23,7 @@
 - 📄 **WellsRAG-Advisor** – retrieval-augmented QA over regulatory docs  
 - 📊 **FinRisk-Sim-Svc** – Monte-Carlo VaR microservice (Java + Python explainability)
 
+#### 📋 CI Status Dashboard
 <!-- CI-BADGE-START -->
 | Project | CI Status |
 |--------|-----------|
