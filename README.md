@@ -33,6 +33,11 @@
 | [notebook-to-prod-template](https://github.com/Br111t/notebook-to-prod-template) | ![CI](https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main) | 🔥 Heating Up |
 <!-- CI-BADGE-END -->
 
+> 🔥 Heating Up (commits within 7 days)  
+> 🟢 Active (within 14 days)  
+> ❄️ Cold (no commits in 14+ days)  
+> ❌ No Data
+
 ### 🛠️ Toolbox
 `Java` • `Spring Boot` • `Python` • `LangChain` • `Docker` • `GitHub Actions` • `Kubernetes` • `Terraform`
 
