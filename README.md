@@ -13,7 +13,6 @@
   </a>
 
 ---
-<p align="center"><strong>CI Status</strong></p>
   
 <!-- CI-BADGE-START -->
 <div align="center">
