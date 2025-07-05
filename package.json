@@ -2,5 +2,8 @@
   "name": "update-profile-readme",
   "scripts": {
     "start": "node scripts/update-readme.cjs"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2"
   }
 }
