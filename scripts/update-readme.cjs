@@ -13,12 +13,13 @@ const repos = [
   },
 ];
 
-const readme = fs.readFileSync("README.md", "utf-8");
+const readme = fs.readFileSync("README.md", "utf8");
 
 const startTag = "<!-- CI-BADGE-START -->";
 const endTag = "<!-- CI-BADGE-END -->";
 
-const tableHTML = `
+const html = `
+<!-- CI-BADGE-START -->
 <div align="center">
 
 <table>
@@ -41,12 +42,14 @@ const tableHTML = `
   </tbody>
 </table>
 
-</div>`.trim();
+</div>
+<!-- CI-BADGE-END -->
+`.trim();
 
-const newReadme = readme.replace(
+const updated = readme.replace(
   new RegExp(`${startTag}[\\s\\S]*${endTag}`),
-  `${startTag}\n${tableHTML}\n${endTag}`
+  html
 );
 
-fs.writeFileSync("README.md", newReadme);
-console.log("✅ README updated with centered HTML CI badge table.");
+fs.writeFileSync("README.md", updated);
+console.log("✅ README updated with centered HTML table.");
