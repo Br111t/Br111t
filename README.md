@@ -12,14 +12,15 @@
     <img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/>
   </a>
 
-
+---
+<p align="center">
 <!-- CI-BADGE-START -->
 | Project | CI Status |
 |---------|-----------|
 | [notebook-to-prod-template](https://github.com/Br111t/notebook-to-prod-template) | ![CI](https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main) |
 | [agent-ops](https://github.com/Br111t/agent-ops) | ![CI](https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main) |
 <!-- CI-BADGE-END -->
-
+</p>
 
 ---
 
@@ -27,10 +28,11 @@
 * **Role:** Software Engineer (TCOO), Wells Fargo  
 * **Focus:** multi-agent LLM orchestration, GenAI tooling, risk & compliance platforms  
 * **Languages:** Java (Spring Boot), Python (LangChain, FastAPI), SQL, Bash  
-* **Currently building:**  
-  * **Agent-Ops** – self-healing log triage with AutoGen agents  
-  * **WellsRAG-Advisor** – retrieval-augmented QA over regulatory docs  
-  * **FinRisk-Sim-Svc** – Monte-Carlo VaR microservice (Java + Python explainability)
+### 🚧 Currently Building
+- 📦 **[notebook-to-prod-template](https://github.com/Br111t/notebook-to-prod-template)** – CI-ready FastAPI microservice scaffold from Jupyter notebooks 
+- 🧠 **Agent-Ops** – self-healing log triage with AutoGen agents  
+- 📄 **WellsRAG-Advisor** – retrieval-augmented QA over regulatory docs  
+- 📊 **FinRisk-Sim-Svc** – Monte-Carlo VaR microservice (Java + Python explainability)
 
 ### 🛠️ Toolbox
 `Java` • `Spring Boot` • `Python` • `LangChain` • `Docker` • `GitHub Actions` • `Kubernetes` • `Terraform`
