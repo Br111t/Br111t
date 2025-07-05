@@ -12,7 +12,7 @@
     <img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/>
   </a>
 
----
+
 <!-- CI-BADGE-START -->
 <div align="center">
 
@@ -38,7 +38,7 @@
 
 </div>
 <!-- CI-BADGE-END -->
----
+
 
 ### 👋 About&nbsp;Me
 * **Role:** Software Engineer (TCOO), Wells Fargo  
