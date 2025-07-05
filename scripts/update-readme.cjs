@@ -18,18 +18,35 @@ const readme = fs.readFileSync("README.md", "utf-8");
 const startTag = "<!-- CI-BADGE-START -->";
 const endTag = "<!-- CI-BADGE-END -->";
 
-const table = `| Project | CI Status |
-|---------|-----------|
-${repos
-  .map(
-    (r) => `| [${r.name}](${r.url}) | ![CI](${r.ci}) |`
-  )
-  .join("\n")}`;
+const tableHTML = `
+<div align="center">
+
+<table>
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>CI Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    ${repos
+      .map(
+        (r) => `
+    <tr>
+      <td><a href="${r.url}">${r.name}</a></td>
+      <td><img src="${r.ci}" alt="CI Status"/></td>
+    </tr>`
+      )
+      .join("")}
+  </tbody>
+</table>
+
+</div>`.trim();
 
 const newReadme = readme.replace(
   new RegExp(`${startTag}[\\s\\S]*${endTag}`),
-  `${startTag}\n${table}\n${endTag}`
+  `${startTag}\n${tableHTML}\n${endTag}`
 );
 
 fs.writeFileSync("README.md", newReadme);
-console.log("✅ README updated.");
+console.log("✅ README updated with centered HTML CI badge table.");
