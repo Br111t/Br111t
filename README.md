@@ -25,7 +25,12 @@
 
 #### 📋 CI Status Dashboard
 <!-- CI-BADGE-START -->
-
+| Project | CI Status | Activity |
+|---------|-----------|----------|
+| [agent-ops](https://github.com/Br111t/agent-ops) | ![CI](https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main) | ⬜ Inactive |
+| [finrisk-sim-svc](https://github.com/Br111t/finrisk-sim-svc) | 🚧 Pending | ⬜ Inactive |
+| [notebook-to-prod-template](https://github.com/Br111t/notebook-to-prod-template) | ![CI](https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main) | ⬜ Inactive |
+| [wellsrag-advisor](https://github.com/Br111t/wellsrag-advisor) | 🚧 Pending | ⬜ Inactive |
 <!-- CI-BADGE-END -->
 
 ### 🛠️ Toolbox
