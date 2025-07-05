@@ -12,13 +12,10 @@
     <img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/>
   </a>
 
-  <!-- CI badge -->
-  <a href="https://github.com/Br111t/agent-ops/actions/workflows/ci.yml">
-    <img src="https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main&event=push" alt="Agent-Ops CI"/>
-  </a>
-</p>
 
-
+<!-- CI-BADGE-START -->
+<!-- Auto-generated badge table -->
+<!-- CI-BADGE-END -->
 
 
 ---
