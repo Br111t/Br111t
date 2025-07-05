@@ -26,24 +26,33 @@ const repos = [
 ];
 
 async function getRepoMetadata(repoName) {
-  const commitsUrl = `https://api.github.com/repos/Br111t/${repoName}/commits?per_page=1`;
   const repoUrl = `https://api.github.com/repos/Br111t/${repoName}`;
+  const commitsUrl = `https://api.github.com/repos/Br111t/${repoName}/commits?per_page=1`;
+  const languagesUrl = `https://api.github.com/repos/Br111t/${repoName}/languages`;
+
   try {
-    const [commitsRes, repoRes] = await Promise.all([
+    const [commitsRes, repoRes, langsRes] = await Promise.all([
       fetch(commitsUrl),
-      fetch(repoUrl)
+      fetch(repoUrl),
+      fetch(languagesUrl)
     ]);
 
-    if (!commitsRes.ok || !repoRes.ok) throw new Error("Bad API response");
+    if (!commitsRes.ok || !repoRes.ok || !langsRes.ok) throw new Error("Bad API response");
 
     const commits = await commitsRes.json();
     const repoInfo = await repoRes.json();
+    const languages = await langsRes.json();
 
     const dateStr = commits[0]?.commit?.committer?.date;
+
+    const languageList = Object.keys(languages)
+      .map(lang => `${getLanguageEmoji(lang)} ${lang}`)
+      .join(", ");
+
     return {
       lastCommit: dateStr ? new Date(dateStr) : null,
       stars: repoInfo.stargazers_count ?? 0,
-      language: repoInfo.language ?? "—"
+      language: languageList || "❌"
     };
   } catch (err) {
     console.error(`[${repoName}] Metadata fetch failed:`, err);
