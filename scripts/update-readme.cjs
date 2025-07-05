@@ -85,7 +85,7 @@ ${tableRows}
 
   const readme = fs.readFileSync("README.md", "utf8");
   const updated = readme.replace(
-    new RegExp(`<!-- CI-BADGE-START -->[\s\S]*<!-- CI-BADGE-END -->`),
+    new RegExp(`<!-- CI-BADGE-START -->[\\s\\S]*<!-- CI-BADGE-END -->`),
     markdown
   );
 
