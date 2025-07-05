@@ -25,21 +25,32 @@ const repos = [
   }
 ];
 
-async function getLastCommitDate(repoName) {
-  const url = `https://api.github.com/repos/Br111t/${repoName}/commits?per_page=1`;
+async function getRepoMetadata(repoName) {
+  const commitsUrl = `https://api.github.com/repos/Br111t/${repoName}/commits?per_page=1`;
+  const repoUrl = `https://api.github.com/repos/Br111t/${repoName}`;
   try {
-    const res = await fetch(url);
-    console.log(`[${repoName}] Status:`, res.status);
-    if (!res.ok) return null;
-    const data = await res.json();
-    const dateStr = data[0]?.commit?.committer?.date;
-    console.log(`[${repoName}] Last Commit:`, dateStr);
-    return dateStr ? new Date(dateStr) : null;
+    const [commitsRes, repoRes] = await Promise.all([
+      fetch(commitsUrl),
+      fetch(repoUrl)
+    ]);
+
+    if (!commitsRes.ok || !repoRes.ok) throw new Error("Bad API response");
+
+    const commits = await commitsRes.json();
+    const repoInfo = await repoRes.json();
+
+    const dateStr = commits[0]?.commit?.committer?.date;
+    return {
+      lastCommit: dateStr ? new Date(dateStr) : null,
+      stars: repoInfo.stargazers_count ?? 0,
+      language: repoInfo.language ?? "—"
+    };
   } catch (err) {
-    console.error(`[${repoName}] Failed to fetch:`, err);
-    return null;
+    console.error(`[${repoName}] Metadata fetch failed:`, err);
+    return { lastCommit: null, stars: 0, language: "❌" };
   }
 }
+
 
 function getActivityStatus(lastRunDate) {
   if (!lastRunDate) return "❌ No Data";
@@ -48,7 +59,33 @@ function getActivityStatus(lastRunDate) {
 
   if (daysAgo <= 7) return "🔥 Heating Up";
   if (daysAgo <= 14) return "🟢 Active";
+  if (daysAgo > 30) return "❄️ Cold 📉";
   return "❄️ Cold";
+}
+
+function getLanguageEmoji(language) {
+  const map = {
+    "Python": "🐍",
+    "Java": "☕",
+    "JavaScript": "🟨",
+    "TypeScript": "🔷",
+    "HTML": "🌐",
+    "CSS": "🎨",
+    "Shell": "🐚",
+    "Dockerfile": "🐳",
+    "Jupyter Notebook": "📓",
+    "Go": "💙",
+    "C++": "➕➕",
+    "C#": "🎯",
+    "C": "📘",
+    "Rust": "🦀"
+  };
+  return map[language] || "";
+}
+
+
+function formatStars(stars) {
+  return stars === 0 ? "🆕 0" : stars;
 }
 
 
@@ -63,26 +100,42 @@ function checkBadgeExists(badgeUrl) {
   });
 }
 
+function getActivityRank(activity) {
+  if (activity.includes("Heating")) return 0;
+  if (activity.includes("Active")) return 1;
+  if (activity.includes("Cold")) return 2;
+  return 3; // No data or unknown
+}
+
 async function buildTable() {
   const enrichedRepos = await Promise.all(
     repos.map(async (repo) => {
-      const lastRunDate = await getLastCommitDate(repo.name);
-      const activity = getActivityStatus(lastRunDate);
+      const meta = await getRepoMetadata(repo.name);
+      const activity = getActivityStatus(meta.lastCommit);
       const ciExists = await checkBadgeExists(repo.ci);
       const ciStatus = ciExists ? `![CI](${repo.ci})` : "🚧 Pending";
-      return { ...repo, activity, ciStatus };
+      return { ...repo, ...meta, activity, ciStatus };
     })
   );
 
-  const tableHeader = `| Project | CI Status | Activity |
-|---------|-----------|----------|`;
+  const tableHeader = `| Project | CI Status | Activity | ⭐ Stars | 🧠 Language |
+|---------|-----------|----------|---------|-------------|`;
 
   const tableRows = enrichedRepos
     .sort((a, b) => {
-      if (a.activity === b.activity) return a.name.localeCompare(b.name);
-      return a.activity === "🟢 Active" ? -1 : 1;
+      const rankA = getActivityRank(a.activity);
+      const rankB = getActivityRank(b.activity);
+      if (rankA !== rankB) return rankA - rankB;
+
+      const ciA = a.ciStatus.includes("passing") ? 0 : a.ciStatus.includes("Pending") ? 1 : 2;
+      const ciB = b.ciStatus.includes("passing") ? 0 : b.ciStatus.includes("Pending") ? 1 : 2;
+      if (ciA !== ciB) return ciA - ciB;
+
+      return a.name.localeCompare(b.name);
     })
-    .map(repo => `| [${repo.name}](${repo.url}) | ${repo.ciStatus} | ${repo.activity} |`)
+    .map(repo =>
+      `| [${repo.name}](${repo.url}) | ${repo.ciStatus} | ${repo.activity} | ${formatStars(repo.stars)} | ${getLanguageEmoji(repo.language)} ${repo.language} |`
+    )
     .join("\n");
 
   const markdown = `<!-- CI-BADGE-START -->
@@ -97,7 +150,8 @@ ${tableRows}
   );
 
   fs.writeFileSync("README.md", updated);
-  console.log("✅ README updated with CI dashboard including activity status.");
+  console.log("✅ README updated with CI, activity, stars, and language metadata.");
 }
 
 buildTable();
+
