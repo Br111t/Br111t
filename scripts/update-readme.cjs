@@ -1,6 +1,6 @@
 const fs = require("fs");
 const https = require("https");
-const fetch = require("node-fetch");
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const repos = [
   {
