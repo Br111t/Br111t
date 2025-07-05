@@ -18,38 +18,27 @@ const readme = fs.readFileSync("README.md", "utf8");
 const startTag = "<!-- CI-BADGE-START -->";
 const endTag = "<!-- CI-BADGE-END -->";
 
-const badgeSection = `
-<!-- CI-BADGE-START -->
-<div align="center">
+const markdown = `<!-- CI-BADGE-START -->
+<h2 align="center">CI Status</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>Project</th>
-      <th>CI Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    ${repos
-      .map(
-        (r) => `
-    <tr>
-      <td><a href="${r.url}">${r.name}</a></td>
-      <td><img src="${r.ci}" alt="CI Status"/></td>
-    </tr>`
-      )
-      .join("")}
-  </tbody>
-</table>
+<p align="center">
 
-</div>
-<!-- CI-BADGE-END -->
-`.trim();
+| Project | CI Status |
+|--------|-----------|
+${repos
+  .map(
+    (r) =>
+      `| [${r.name}](${r.url}) | ![CI](${r.ci}) |`
+  )
+  .join("\n")}
+
+</p>
+<!-- CI-BADGE-END -->`.trim();
 
 const updated = readme.replace(
-  new RegExp(`${startTag}[\\s\\S]*?${endTag}`),
-  badgeSection
+  new RegExp(`${startTag}[\\s\\S]*${endTag}`),
+  markdown
 );
 
-fs.writeFileSync("README.md", updated, { encoding: "utf8" });
-console.log("✅ README updated with centered HTML table.");
+fs.writeFileSync("README.md", updated);
+console.log("✅ README updated with Markdown CI table.");
