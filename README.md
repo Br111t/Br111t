@@ -16,10 +16,29 @@
 <p align="center"><strong>CI Status</strong></p>
   
 <!-- CI-BADGE-START -->
-| Project | CI Status |
-|---------|-----------|
-| [notebook-to-prod-template](https://github.com/Br111t/notebook-to-prod-template) | ![CI](https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main) |
-| [agent-ops](https://github.com/Br111t/agent-ops) | ![CI](https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main) |
+<div align="center">
+
+<table>
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>CI Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td><a href="https://github.com/Br111t/notebook-to-prod-template">notebook-to-prod-template</a></td>
+      <td><img src="https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI Status"/></td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/Br111t/agent-ops">agent-ops</a></td>
+      <td><img src="https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI Status"/></td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
 <!-- CI-BADGE-END -->
 
 
