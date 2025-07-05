@@ -13,15 +13,6 @@
   </a>
 </p>
 
-
-<!-- CI-BADGE-START -->
-| Project | CI Status |
-|--------|-----------|
-| [notebook-to-prod-template](https://github.com/Br111t/notebook-to-prod-template) | ![CI](https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main) |
-| [agent-ops](https://github.com/Br111t/agent-ops) | ![CI](https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main) |
-<!-- CI-BADGE-END -->
-
-
 ### 👋 About&nbsp;Me
 * **Role:** Software Engineer (TCOO), Wells Fargo  
 * **Focus:** multi-agent LLM orchestration, GenAI tooling, risk & compliance platforms  
@@ -31,6 +22,13 @@
 - 🧠 **Agent-Ops** – self-healing log triage with AutoGen agents  
 - 📄 **WellsRAG-Advisor** – retrieval-augmented QA over regulatory docs  
 - 📊 **FinRisk-Sim-Svc** – Monte-Carlo VaR microservice (Java + Python explainability)
+
+<!-- CI-BADGE-START -->
+| Project | CI Status |
+|--------|-----------|
+| [notebook-to-prod-template](https://github.com/Br111t/notebook-to-prod-template) | ![CI](https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main) |
+| [agent-ops](https://github.com/Br111t/agent-ops) | ![CI](https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main) |
+<!-- CI-BADGE-END -->
 
 ### 🛠️ Toolbox
 `Java` • `Spring Boot` • `Python` • `LangChain` • `Docker` • `GitHub Actions` • `Kubernetes` • `Terraform`
