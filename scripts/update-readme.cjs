@@ -13,20 +13,12 @@ const repos = [
   },
 ];
 
+const readme = fs.readFileSync("README.md", "utf8");
+
 const startTag = "<!-- CI-BADGE-START -->";
 const endTag = "<!-- CI-BADGE-END -->";
 
-// Read current README
-const readme = fs.readFileSync("README.md", "utf8");
-
-// Optional: guard if tags are missing
-if (!readme.includes(startTag) || !readme.includes(endTag)) {
-  console.error("❌ CI badge section not found in README.md");
-  process.exit(1);
-}
-
-// New HTML block to insert
-const html = `
+const badgeSection = `
 <!-- CI-BADGE-START -->
 <div align="center">
 
@@ -54,13 +46,10 @@ const html = `
 <!-- CI-BADGE-END -->
 `.trim();
 
-// 🔁 This is the line you asked about — it does the actual replacement
 const updated = readme.replace(
-  new RegExp(`${startTag}[\\s\\S]*${endTag}`),
-  html
+  new RegExp(`${startTag}[\\s\\S]*?${endTag}`),
+  badgeSection
 );
 
-// Save the updated file
-fs.writeFileSync("README.md", updated);
-
+fs.writeFileSync("README.md", updated, { encoding: "utf8" });
 console.log("✅ README updated with centered HTML table.");
