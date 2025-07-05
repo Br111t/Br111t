@@ -1,0 +1,7 @@
+{
+  "name": "update-profile-readme",
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/update-readme.js"
+  }
+}
