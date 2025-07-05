@@ -29,11 +29,14 @@ async function getLastCommitDate(repoName) {
   const url = `https://api.github.com/repos/Br111t/${repoName}/commits?per_page=1`;
   try {
     const res = await fetch(url);
+    console.log(`[${repoName}] Status:`, res.status);
     if (!res.ok) return null;
     const data = await res.json();
     const dateStr = data[0]?.commit?.committer?.date;
+    console.log(`[${repoName}] Last Commit:`, dateStr);
     return dateStr ? new Date(dateStr) : null;
-  } catch {
+  } catch (err) {
+    console.error(`[${repoName}] Failed to fetch:`, err);
     return null;
   }
 }
