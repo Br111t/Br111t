@@ -19,10 +19,6 @@ const startTag = "<!-- CI-BADGE-START -->";
 const endTag = "<!-- CI-BADGE-END -->";
 
 const markdown = `<!-- CI-BADGE-START -->
-<h2 align="center">CI Status</h2>
-
-<p align="center">
-
 | Project | CI Status |
 |--------|-----------|
 ${repos
