@@ -42,11 +42,15 @@ async function getLastCommitDate(repoName) {
 }
 
 function getActivityStatus(lastRunDate) {
-  if (!lastRunDate) return "⬜ Inactive";
+  if (!lastRunDate) return "❌ No Data";
   const now = new Date();
   const daysAgo = (now - lastRunDate) / (1000 * 60 * 60 * 24);
-  return daysAgo <= 14 ? "🟢 Active" : "⬜ Inactive";
+
+  if (daysAgo <= 7) return "🔥 Heating Up";
+  if (daysAgo <= 14) return "🟢 Active";
+  return "❄️ Cold";
 }
+
 
 function checkBadgeExists(badgeUrl) {
   return new Promise((resolve) => {
