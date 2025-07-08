@@ -1,25 +1,20 @@
 name: Update Profile README with CI Status
 
-# run on every push to main, and weekly on Monday at 04:00 UTC
 on:
-  push:
-    branches:
-      - main
   schedule:
-    - cron: '0 4 * * 1'
+    - cron: '0 4 * * 1'  # Every Monday at 4 AM UTC
+  workflow_dispatch:
 
 permissions:
-  contents: write    # so the workflow can push updated README.md
-  metadata: read     # if you need to read repo metadata
+  contents: write
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
+      - name: Checkout profile repo
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -29,14 +24,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run update-readme script
+      - name: Run update-readme.cjs
         run: node scripts/update-readme.cjs
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Commit & push changes
+      - name: Commit and push if changed
         run: |
           git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'actions@github.com'
-          git commit -am "chore: update profile README badge"
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add README.md
+          git commit -m "chore: auto-update CI status dashboard" || echo "No changes to commit"
           git push
