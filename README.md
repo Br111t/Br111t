@@ -14,7 +14,7 @@
 </p>
 
 ### 👋 About&nbsp;Me
-* **Role:** Software Engineer (TCOO), Wells Fargo  
+* **Role:** Software Engineer (COO Technology), Wells Fargo  
 * **Focus:** multi-agent LLM orchestration, GenAI tooling, risk & compliance platforms  
 * **Languages:** Java (Spring Boot), Python (LangChain, FastAPI), SQL, Bash  
 ### 🚧 Currently Building
