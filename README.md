@@ -46,7 +46,7 @@
 
 ### 📚 Parallel Learning Track
 
-While my main focus is building agentic and AI-driven systems in production, I also maintain a 📘 [Coursework Archive](https://github.com/Coursework-Archive) to support continuous learning and skill development.
+While my main focus is building agentic and AI-driven systems, I also maintain a 📘 [Coursework Archive](https://github.com/Coursework-Archive) to support continuous learning and skill development.
 
 | Track | Last Activity |
 |-------|---------------|
