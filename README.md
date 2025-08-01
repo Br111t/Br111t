@@ -43,6 +43,21 @@
 ### 🛠️ Toolbox
 `Java` • `Spring Boot` • `Python` • `LangChain` • `Docker` • `GitHub Actions` • `Kubernetes` • `Terraform`
 
+### 🧭 Parallel Learning Track
+
+While my main focus is on applied AI and engineering for financial systems, I also maintain a [📚 Coursework Archive](https://github.com/Coursework-Archive) for continuous learning.
+
+| Track | Last Activity |
+|-------|---------------|
+| [python-coursework](https://github.com/Coursework-Archive/python-coursework) | ![Last Commit](https://img.shields.io/github/last-commit/Coursework-Archive/python-coursework?style=flat-square) |
+| [sql-fundamentals](https://github.com/Coursework-Archive/sql-fundamentals) | ![Last Commit](https://img.shields.io/github/last-commit/Coursework-Archive/sql-fundamentals?style=flat-square) |
+| [java-core-fundamentals](https://github.com/Coursework-Archive/java-core-fundamentals) | ![Last Commit](https://img.shields.io/github/last-commit/Coursework-Archive/java-core-fundamentals?style=flat-square) |
+| [web-dev-coursework](https://github.com/Coursework-Archive/web-dev-coursework) | ![Last Commit](https://img.shields.io/github/last-commit/Coursework-Archive/web-dev-coursework?style=flat-square) |
+
+> 💡 Coursework is version-controlled and archived for reference at [`@Coursework-Archive`](https://github.com/Coursework-Archive)
+
+
+
 ### 📈 GitHub Stats
 ![Brittany’s GitHub stats](https://github-readme-stats.vercel.app/api?username=Br111t&show_icons=true&hide_border=true)
 
