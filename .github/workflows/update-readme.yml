@@ -29,6 +29,8 @@ jobs:
         run: npm install
 
       - name: Run update-readme script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/update-readme.cjs
 
       - name: Commit & push changes if any
