@@ -45,40 +45,49 @@ async function lastHumanCommitDate(owner, repo, pages = 3) {
   for (let page = 1; page <= pages; page++) {
     const list = await gh(`https://api.github.com/repos/${owner}/${repo}/commits?sha=${def}&per_page=100&page=${page}`);
     if (!Array.isArray(list) || list.length === 0) break;
-    
+
     // 1) Prefer your commit (not a bot)
     let chosen = list.find(c => isMyCommit(c) && !isBotCommit(c));
-    
     // 2) Fallback: any non-bot commit
     if (!chosen) chosen = list.find(c => !isBotCommit(c));
-    
-    // 3) Last resort: take the first commit on the branch (it’s still human activity)
+    // 3) Last resort: take the first commit on the branch
     if (!chosen) chosen = list[0];
-    
+
+    if (chosen) {
+      const d = new Date(chosen.commit.committer.date);
+      console.log(`[activity] ${owner}/${repo} -> ${d.toISOString()} by ${chosen.author?.login || chosen.commit?.author?.name}`);
+      return d;               // <-- you were missing this!
+    }
   }
+
   console.log(`[activity] ${owner}/${repo} -> no qualifying commits found on ${def}`);
   return null;
 }
 
+
 function getLanguageEmoji(language) {
   const map = {
-    "Python": "🐍",
-    "Java": "☕",
-    "JavaScript": "🟨",
-    "TypeScript": "🔷",
-    "HTML": "🌐",
-    "CSS": "🎨",
-    "Shell": "🐚",
-    "Dockerfile": "🐳",
+    Python: "🐍",
+    Java: "☕",
+    JavaScript: "🟨",
+    TypeScript: "🔷",
+    HTML: "🌐",
+    CSS: "🎨",
+    Shell: "🐚",
+    "PowerShell": "🪟",
+    Dockerfile: "🐳",
     "Jupyter Notebook": "📓",
-    "Go": "💙",
+    Go: "💙",
     "C++": "➕➕",
     "C#": "🎯",
-    "C": "📘",
-    "Rust": "🦀"
+    C: "📘",
+    Rust: "🦀",
+    YAML: "📄",
+    Makefile: "🧱"
   };
   return map[language] || "";
 }
+
 
 /* ---------- Repos to show ---------- */
 const repos = [
@@ -98,22 +107,30 @@ const repos = [
 
 /* ---------- Patched metadata fetch ---------- */
 async function getRepoMetadata(repoName) {
-  try {
-    const [repoInfo, languages, lastHuman] = await Promise.all([
-      gh(`https://api.github.com/repos/Br111t/${repoName}`),
-      gh(`https://api.github.com/repos/Br111t/${repoName}/languages`),
-      lastHumanCommitDate("Br111t", repoName)
-    ]);
+  try {const [repoInfo, languages, lastHuman] = await Promise.all([
+  gh(`https://api.github.com/repos/Br111t/${repoName}`),
+  gh(`https://api.github.com/repos/Br111t/${repoName}/languages`),
+  lastHumanCommitDate("Br111t", repoName)
+]);
 
-    const languageList = Object.keys(languages)
-      .map(lang => `${getLanguageEmoji(lang)} ${lang}`)
-      .join(", ");
+let languageList = Object.entries(languages)
+  .sort((a, b) => b[1] - a[1])          // biggest first
+  .slice(0, 5)                          // top 5 languages
+  .map(([lang]) => `${getLanguageEmoji(lang)} ${lang}`)
+  .join(", ");
 
-    return {
-      lastCommit: lastHuman,                           // human commit on default branch
-      stars: repoInfo.stargazers_count ?? 0,
-      language: languageList || "❌"
-    };
+// Fallback if nothing detected
+if (!languageList && repoInfo.language) {
+  languageList = `${getLanguageEmoji(repoInfo.language)} ${repoInfo.language}`;
+}
+
+
+return {
+  lastCommit: lastHuman,
+  stars: repoInfo.stargazers_count ?? 0,
+  language: languageList || "❌"
+};
+
   } catch (err) {
     console.error(`[${repoName}] Metadata fetch failed:`, err);
     return { lastCommit: null, stars: 0, language: "❌" };
