@@ -154,6 +154,7 @@ async function buildTable() {
     );
 
     const activity = getActivityStatus(meta.lastCommit);
+    console.log(`[activity] ${repo.name} classified as: ${activity}`);
     const ciExists = await checkBadgeExists(repo.ci);
     const ciStatus = ciExists ? `![CI](${repo.ci})` : "🚧 Pending";
 
@@ -197,10 +198,26 @@ ${tableHeader}
 ${tableRows}
 <!-- CI-BADGE-END -->`;
 
-  const readme = fs.readFileSync("README.md", "utf8");
-  const updated = readme.replace(/<!-- CI-BADGE-START -->[\s\S]*<!-- CI-BADGE-END -->/, markdown);
+// --- write README block and report if it changed ---
+const readme = fs.readFileSync("README.md", "utf8");
+
+const blockRegex = /<!-- CI-BADGE-START -->[\s\S]*<!-- CI-BADGE-END -->/;
+if (!blockRegex.test(readme)) {
+  console.error("❌ Marker block not found in README.md. Make sure README contains:");
+  console.error("   <!-- CI-BADGE-START -->");
+  console.error("   <!-- CI-BADGE-END -->");
+  process.exitCode = 1; // fail the job so you see it
+  return;
+}
+
+const updated = readme.replace(blockRegex, markdown);
+
+if (updated === readme) {
+  console.log("ℹ️ README block unchanged (no content diff).");
+} else {
   fs.writeFileSync("README.md", updated);
   console.log("✅ README updated with CI, activity, stars, and language metadata.");
 }
+
 
 buildTable();
