@@ -1,74 +1,42 @@
+// scripts/update-readme.cjs
 const fs = require("fs");
 const https = require("https");
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
-const repos = [
-  {
-    name: "notebook-to-prod-template",
-    ci: "https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main",
-    url: "https://github.com/Br111t/notebook-to-prod-template"
-  },
-  {
-    name: "agent-ops",
-    ci: "https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main",
-    url: "https://github.com/Br111t/agent-ops"
-  },
-  {
-    name: "finrisk-sim-svc",
-    ci: "https://github.com/Br111t/finrisk-sim-svc/actions/workflows/ci.yml/badge.svg?branch=main",
-    url: "https://github.com/Br111t/finrisk-sim-svc"
-  },
-  {
-    name: "wellsrag-advisor",
-    ci: "https://github.com/Br111t/wellsrag-advisor/actions/workflows/ci.yml/badge.svg?branch=main",
-    url: "https://github.com/Br111t/wellsrag-advisor"
-  }
-];
+/* ---------- Config & helpers ---------- */
+const GH_TOKEN = process.env.GITHUB_TOKEN;
+const H = { "User-Agent": "br111t-activity", ...(GH_TOKEN ? { Authorization: `Bearer ${GH_TOKEN}` } : {}) };
 
-async function getRepoMetadata(repoName) {
-  const repoUrl = `https://api.github.com/repos/Br111t/${repoName}`;
-  const commitsUrl = `https://api.github.com/repos/Br111t/${repoName}/commits?per_page=1`;
-  const languagesUrl = `https://api.github.com/repos/Br111t/${repoName}/languages`;
-
-  try {
-    const [commitsRes, repoRes, langsRes] = await Promise.all([
-      fetch(commitsUrl),
-      fetch(repoUrl),
-      fetch(languagesUrl)
-    ]);
-
-    if (!commitsRes.ok || !repoRes.ok || !langsRes.ok) throw new Error("Bad API response");
-
-    const commits = await commitsRes.json();
-    const repoInfo = await repoRes.json();
-    const languages = await langsRes.json();
-
-    const dateStr = commits[0]?.commit?.committer?.date;
-
-    const languageList = Object.keys(languages)
-      .map(lang => `${getLanguageEmoji(lang)} ${lang}`)
-      .join(", ");
-
-    return {
-      lastCommit: dateStr ? new Date(dateStr) : null,
-      stars: repoInfo.stargazers_count ?? 0,
-      language: languageList || "❌"
-    };
-  } catch (err) {
-    console.error(`[${repoName}] Metadata fetch failed:`, err);
-    return { lastCommit: null, stars: 0, language: "❌" };
-  }
+async function gh(url) {
+  const r = await fetch(url, { headers: H });
+  if (!r.ok) throw new Error(`${r.status} ${r.statusText} for ${url}`);
+  return r.json();
 }
 
-function getActivityStatus(lastRunDate) {
-  if (!lastRunDate) return "❌ No Data";
-  const now = new Date();
-  const daysAgo = (now - lastRunDate) / (1000 * 60 * 60 * 24);
+function isBotCommit(c) {
+  const login = c.author?.login?.toLowerCase() || "";
+  const name  = c.commit?.committer?.name?.toLowerCase() || "";
+  const msg   = (c.commit?.message || "").toLowerCase();
 
-  if (daysAgo <= 7) return "🔥 Heating Up";
-  if (daysAgo <= 14) return "🟢 Active";
-  if (daysAgo > 30) return "❄️ Cold 📉";
-  return "❄️ Cold";
+  return login.endsWith("[bot]") ||
+         login === "github-actions[bot]" ||
+         name.includes("github") ||
+         msg.includes("dependabot") ||
+         msg.includes("auto-update ci status badge") ||
+         msg.includes("update badges");
+}
+
+async function lastHumanCommitDate(owner, repo, pages = 3) {
+  const info = await gh(`https://api.github.com/repos/${owner}/${repo}`);
+  const def = info.default_branch || "main";
+
+  for (let page = 1; page <= pages; page++) {
+    const list = await gh(`https://api.github.com/repos/${owner}/${repo}/commits?sha=${def}&per_page=100&page=${page}`);
+    if (!Array.isArray(list) || list.length === 0) break;
+    const human = list.find(c => !isBotCommit(c));
+    if (human) return new Date(human.commit.committer.date);
+  }
+  return null;
 }
 
 function getLanguageEmoji(language) {
@@ -91,24 +59,73 @@ function getLanguageEmoji(language) {
   return map[language] || "";
 }
 
+/* ---------- Repos to show ---------- */
+const repos = [
+  { name: "notebook-to-prod-template",
+    ci: "https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main",
+    url: "https://github.com/Br111t/notebook-to-prod-template" },
+  { name: "agent-ops",
+    ci: "https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main",
+    url: "https://github.com/Br111t/agent-ops" },
+  { name: "finrisk-sim-svc",
+    ci: "https://github.com/Br111t/finrisk-sim-svc/actions/workflows/ci.yml/badge.svg?branch=main",
+    url: "https://github.com/Br111t/finrisk-sim-svc" },
+  { name: "wellsrag-advisor",
+    ci: "https://github.com/Br111t/wellsrag-advisor/actions/workflows/ci.yml/badge.svg?branch=main",
+    url: "https://github.com/Br111t/wellsrag-advisor" },
+];
+
+/* ---------- Patched metadata fetch ---------- */
+async function getRepoMetadata(repoName) {
+  try {
+    const [repoInfo, languages, lastHuman] = await Promise.all([
+      gh(`https://api.github.com/repos/Br111t/${repoName}`),
+      gh(`https://api.github.com/repos/Br111t/${repoName}/languages`),
+      lastHumanCommitDate("Br111t", repoName)
+    ]);
+
+    const languageList = Object.keys(languages)
+      .map(lang => `${getLanguageEmoji(lang)} ${lang}`)
+      .join(", ");
+
+    return {
+      lastCommit: lastHuman,                           // human commit on default branch
+      stars: repoInfo.stargazers_count ?? 0,
+      language: languageList || "❌"
+    };
+  } catch (err) {
+    console.error(`[${repoName}] Metadata fetch failed:`, err);
+    return { lastCommit: null, stars: 0, language: "❌" };
+  }
+}
+
+/* ---------- Other utilities ---------- */
+function getActivityStatus(lastRunDate) {
+  if (!lastRunDate) return "❌ No Data";
+  const now = new Date();
+  const daysAgo = (now - lastRunDate) / (1000 * 60 * 60 * 24);
+  if (daysAgo <= 7) return "🔥 Heating Up";
+  if (daysAgo <= 14) return "🟢 Active";
+  if (daysAgo > 30) return "❄️ Cold 📉";
+  return "❄️ Cold";
+}
+
 function checkBadgeExists(badgeUrl) {
   return new Promise((resolve) => {
-    https
-      .request(badgeUrl, { method: "HEAD" }, (res) => {
-        resolve(res.statusCode !== 404);
-      })
-      .on("error", () => resolve(false))
-      .end();
+    https.request(badgeUrl, { method: "HEAD" }, (res) => resolve(res.statusCode !== 404))
+         .on("error", () => resolve(false))
+         .end();
   });
 }
 
 function getActivityRank(activity) {
   if (activity.includes("Heating")) return 0;
-  if (activity.includes("Active")) return 1;
-  if (activity.includes("Cold")) return 2;
-  return 3; // No data or unknown
+  if (activity.includes("Active"))  return 1;
+  if (activity.includes("Cold"))    return 2;
+  return 3;
 }
 
+/* ---------- Build README table ---------- */
 async function buildTable() {
   const enrichedRepos = await Promise.all(
     repos.map(async (repo) => {
@@ -148,7 +165,7 @@ async function buildTable() {
     .map(repo =>
       `| [${repo.name}](${repo.url}) | ${repo.ciStatus} | ${repo.activity} |${
         hasStars ? ` ${formatStars(repo.stars, repo.lastCommit)} |` : ""
-      } ${getLanguageEmoji(repo.language)} ${repo.language} |`
+      } ${repo.language} |`                                    // <- no double emoji
     )
     .join("\n");
 
@@ -158,11 +175,7 @@ ${tableRows}
 <!-- CI-BADGE-END -->`;
 
   const readme = fs.readFileSync("README.md", "utf8");
-  const updated = readme.replace(
-    new RegExp(`<!-- CI-BADGE-START -->[\\s\\S]*<!-- CI-BADGE-END -->`),
-    markdown
-  );
-
+  const updated = readme.replace(/<!-- CI-BADGE-START -->[\s\S]*<!-- CI-BADGE-END -->/, markdown);
   fs.writeFileSync("README.md", updated);
   console.log("✅ README updated with CI, activity, stars, and language metadata.");
 }
