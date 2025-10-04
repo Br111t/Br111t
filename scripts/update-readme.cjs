@@ -88,6 +88,23 @@ function getLanguageEmoji(language) {
   return map[language] || "";
 }
 
+function languageListToTwoLines(languagesObj, primaryFromRepo) {
+  // top 5 by bytes
+  const entries = Object.entries(languagesObj)
+    .sort((a,b) => b[1]-a[1])
+    .map(([lang]) => `${getLanguageEmoji(lang)} ${lang}`);
+
+  // fallback to GitHub’s primary language if empty
+  if (entries.length === 0 && primaryFromRepo) {
+    entries.push(`${getLanguageEmoji(primaryFromRepo)} ${primaryFromRepo}`);
+  }
+
+  if (entries.length <= 2) return entries.join(", ") || "⚠️ No code detected";
+
+  const firstLine = entries.slice(0, 2).join(", ");
+  const secondLine = entries.slice(2).join(", ");
+  return `${firstLine}<br>${secondLine}`;
+}
 
 /* ---------- Repos to show ---------- */
 const repos = [
@@ -111,31 +128,17 @@ async function getRepoMetadata(repoName) {
     const [repoInfo, languages, lastHuman] = await Promise.all([
       gh(`https://api.github.com/repos/Br111t/${repoName}`),
       gh(`https://api.github.com/repos/Br111t/${repoName}/languages`),
-      lastHumanCommitDate("Br111t", repoName),
+      lastHumanCommitDate("Br111t", repoName)
     ]);
-
-    // Build a readable language string from the /languages breakdown
-    let languageList = Object.entries(languages)
-      .sort((a, b) => b[1] - a[1])          // biggest first
-      .slice(0, 5)                          // top 5
-      .map(([lang]) => `${getLanguageEmoji(lang)} ${lang}`)
-      .join(", ");
-
-    // Fallback 1: GitHub's primary language if /languages is empty
-    if (!languageList && repoInfo.language) {
-      languageList = `${getLanguageEmoji(repoInfo.language)} ${repoInfo.language}`;
-    }
-
-    // Fallback 2: explicit message if absolutely nothing detected
-    if (!languageList) {
-      languageList = "⚠️ No code detected";
-    }
-
+    
+    const languageList = languageListToTwoLines(languages, repoInfo.language);
+    
     return {
       lastCommit: lastHuman,
       stars: repoInfo.stargazers_count ?? 0,
-      language: languageList,
+      language: languageList
     };
+    
   } catch (err) {
     console.error(`[${repoName}] Metadata fetch failed:`, err);
     return { lastCommit: null, stars: 0, language: "❌" };
@@ -199,8 +202,9 @@ async function buildTable() {
     return `⭐ ${stars}`;
   }
 
-  const tableHeader = `| Project | CI Status | Activity |${hasStars ? " ⭐ Stars |" : ""} 🧠 Language |
-|---------|-----------|----------|${hasStars ? "---------|" : ""}-------------|`;
+const tableHeader =
+  `| Project | CI | Activity |${hasStars ? " ⭐ Stars |" : ""} Lang |
+|---------|----|----------|${hasStars ? "---------|" : ""}------|`;
 
   const tableRows = enrichedRepos
     .sort((a, b) => {
