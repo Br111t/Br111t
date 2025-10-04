@@ -25,12 +25,7 @@
 
 #### 📋 CI Status Dashboard
 <!-- CI-BADGE-START -->
-| Project | CI Status | Activity | ⭐ Stars | 🧠 Language |
-|---------|-----------|----------|---------|-------------|
-| [notebook-to-prod-template](https://github.com/Br111t/notebook-to-prod-template) | ![CI](https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main) | 🔥 Heating Up | ⭐ 2 |  📓 Jupyter Notebook, 🐍 Python, 🐳 Dockerfile |
-| [finrisk-sim-svc](https://github.com/Br111t/finrisk-sim-svc) | 🚧 Pending | ❄️ Cold | ⭐ 1 |  ❌ |
-| [wellsrag-advisor](https://github.com/Br111t/wellsrag-advisor) | 🚧 Pending | ❄️ Cold | ⭐ 1 |  ❌ |
-| [agent-ops](https://github.com/Br111t/agent-ops) | ![CI](https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main) | ❄️ Cold | ⭐ 1 |  🐍 Python |
+
 <!-- CI-BADGE-END -->
 
 > 🔥 Heating Up (commits within 7 days)  
