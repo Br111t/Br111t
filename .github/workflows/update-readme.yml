@@ -38,7 +38,13 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
-          echo "git status:"
+      
+          echo "git status (after add):"
           git status --porcelain
-          git diff --quiet || git commit -m "chore: auto-update CI status badge"
-          git push origin HEAD:main
+      
+          if git diff --cached --quiet; then
+            echo "No staged changes to commit."
+          else
+            git commit -m "chore: auto-update CI status badge"
+            git push origin HEAD:main
+          fi
