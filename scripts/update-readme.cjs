@@ -119,23 +119,22 @@ let languageList = Object.entries(languages)
   .map(([lang]) => `${getLanguageEmoji(lang)} ${lang}`)
   .join(", ");
 
-// Fallback if nothing detected
+// Fallback 1: use GitHub’s primary language if /languages is empty
 if (!languageList && repoInfo.language) {
   languageList = `${getLanguageEmoji(repoInfo.language)} ${repoInfo.language}`;
 }
 
+// Fallback 2: explicit "No code detected" if absolutely nothing
+if (!languageList) {
+  languageList = "⚠️ No code detected";
+}
 
 return {
   lastCommit: lastHuman,
   stars: repoInfo.stargazers_count ?? 0,
-  language: languageList || "❌"
+  language: languageList
 };
 
-  } catch (err) {
-    console.error(`[${repoName}] Metadata fetch failed:`, err);
-    return { lastCommit: null, stars: 0, language: "❌" };
-  }
-}
 
 /* ---------- Other utilities ---------- */
 function getActivityStatus(lastRunDate) {
