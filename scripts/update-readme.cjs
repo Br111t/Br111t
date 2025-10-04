@@ -13,6 +13,10 @@ async function gh(url) {
   return r.json();
 }
 
+function isMyCommit(c) {
+  return (c.author?.login || "").toLowerCase() === "br111t";
+}
+
 function isBotCommit(c) {
   const login = c.author?.login?.toLowerCase() || "";
   const name  = c.commit?.committer?.name?.toLowerCase() || "";
@@ -33,9 +37,20 @@ async function lastHumanCommitDate(owner, repo, pages = 3) {
   for (let page = 1; page <= pages; page++) {
     const list = await gh(`https://api.github.com/repos/${owner}/${repo}/commits?sha=${def}&per_page=100&page=${page}`);
     if (!Array.isArray(list) || list.length === 0) break;
-    const human = list.find(c => !isBotCommit(c));
-    if (human) return new Date(human.commit.committer.date);
+    
+        // 1) Prefer YOUR commit (not a bot)
+    let chosen = list.find(c => isMyCommit(c) && !isBotCommit(c));
+
+        // 2) Fallback: any non-bot commit
+    if (!chosen) chosen = list.find(c => !isBotCommit(c));
+    
+    if (chosen) {
+      const d = new Date(chosen.commit.committer.date);
+      console.log(`[activity] ${owner}/${repo} -> ${d.toISOString()} by ${chosen.author?.login} | "${(chosen.commit?.message || "").slice(0,80)}"`);
+      return d;
+    }
   }
+  console.log(`[activity] ${owner}/${repo} -> no qualifying commits found on ${def}`);
   return null;
 }
 
@@ -127,17 +142,25 @@ function getActivityRank(activity) {
 
 /* ---------- Build README table ---------- */
 async function buildTable() {
-  const enrichedRepos = await Promise.all(
-    repos.map(async (repo) => {
-      const meta = await getRepoMetadata(repo.name);
-      const activity = getActivityStatus(meta.lastCommit);
-      const ciExists = await checkBadgeExists(repo.ci);
-      const ciStatus = ciExists ? `![CI](${repo.ci})` : "🚧 Pending";
-      return { ...repo, ...meta, activity, ciStatus };
-    })
-  );
+  const enrichedRepos = [];
 
-  const hasStars = enrichedRepos.some(repo => repo.stars > 0);
+  for (const repo of repos) {
+    const meta = await getRepoMetadata(repo.name);
+
+    // DEBUG: show what commit/date we’re classifying
+    console.log(
+      `[activity] using ${repo.name} lastCommit=`,
+      meta.lastCommit ? meta.lastCommit.toISOString() : "null"
+    );
+
+    const activity = getActivityStatus(meta.lastCommit);
+    const ciExists = await checkBadgeExists(repo.ci);
+    const ciStatus = ciExists ? `![CI](${repo.ci})` : "🚧 Pending";
+
+    enrichedRepos.push({ ...repo, ...meta, activity, ciStatus });
+  }
+
+  const hasStars = enrichedRepos.some(r => r.stars > 0);
 
   function formatStars(stars, lastCommit) {
     const now = new Date();
@@ -165,7 +188,7 @@ async function buildTable() {
     .map(repo =>
       `| [${repo.name}](${repo.url}) | ${repo.ciStatus} | ${repo.activity} |${
         hasStars ? ` ${formatStars(repo.stars, repo.lastCommit)} |` : ""
-      } ${repo.language} |`                                    // <- no double emoji
+      } ${repo.language} |`
     )
     .join("\n");
 
