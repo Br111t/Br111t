@@ -38,6 +38,7 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
+          echo "git status:"
+          git status --porcelain
           git diff --quiet || git commit -m "chore: auto-update CI status badge"
           git push origin HEAD:main
-          # you can change "main" to whatever your default branch is
