@@ -194,30 +194,33 @@ async function buildTable() {
     .join("\n");
 
   const markdown = `<!-- CI-BADGE-START -->
-${tableHeader}
-${tableRows}
-<!-- CI-BADGE-END -->`;
-
-// --- write README block and report if it changed ---
-const readme = fs.readFileSync("README.md", "utf8");
-
-const blockRegex = /<!-- CI-BADGE-START -->[\s\S]*<!-- CI-BADGE-END -->/;
-if (!blockRegex.test(readme)) {
-  console.error("❌ Marker block not found in README.md. Make sure README contains:");
-  console.error("   <!-- CI-BADGE-START -->");
-  console.error("   <!-- CI-BADGE-END -->");
-  process.exitCode = 1; // fail the job so you see it
-  return;
+  ${tableHeader}
+  ${tableRows}
+  <!-- CI-BADGE-END -->`;
+  
+  // --- write README block and report if it changed ---
+  const readme = fs.readFileSync("README.md", "utf8");
+  
+  const blockRegex = /<!-- CI-BADGE-START -->[\s\S]*<!-- CI-BADGE-END -->/;
+  if (!blockRegex.test(readme)) {
+    console.error("❌ Marker block not found in README.md. Make sure README contains:");
+    console.error("   <!-- CI-BADGE-START -->");
+    console.error("   <!-- CI-BADGE-END -->");
+    process.exitCode = 1; // fail the job so you see it
+    return;
+  }
+  
+  const updated = readme.replace(blockRegex, markdown);
+  
+  if (updated === readme) {
+    console.log("ℹ️ README block unchanged (no content diff).");
+  } else {
+    fs.writeFileSync("README.md", updated);
+    console.log("✅ README updated with CI, activity, stars, and language metadata.");
+  }
 }
 
-const updated = readme.replace(blockRegex, markdown);
-
-if (updated === readme) {
-  console.log("ℹ️ README block unchanged (no content diff).");
-} else {
-  fs.writeFileSync("README.md", updated);
-  console.log("✅ README updated with CI, activity, stars, and language metadata.");
-}
-
-
-buildTable();
+buildTable().catch(err => {
+  console.error("❌ update-readme failed:", err);
+  process.exit(1);
+});
