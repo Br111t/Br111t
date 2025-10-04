@@ -105,36 +105,42 @@ const repos = [
     url: "https://github.com/Br111t/wellsrag-advisor" },
 ];
 
-/* ---------- Patched metadata fetch ---------- */
+/* ---------- metadata fetch ---------- */
 async function getRepoMetadata(repoName) {
-  try {const [repoInfo, languages, lastHuman] = await Promise.all([
-  gh(`https://api.github.com/repos/Br111t/${repoName}`),
-  gh(`https://api.github.com/repos/Br111t/${repoName}/languages`),
-  lastHumanCommitDate("Br111t", repoName)
-]);
+  try {
+    const [repoInfo, languages, lastHuman] = await Promise.all([
+      gh(`https://api.github.com/repos/Br111t/${repoName}`),
+      gh(`https://api.github.com/repos/Br111t/${repoName}/languages`),
+      lastHumanCommitDate("Br111t", repoName),
+    ]);
 
-let languageList = Object.entries(languages)
-  .sort((a, b) => b[1] - a[1])          // biggest first
-  .slice(0, 5)                          // top 5 languages
-  .map(([lang]) => `${getLanguageEmoji(lang)} ${lang}`)
-  .join(", ");
+    // Build a readable language string from the /languages breakdown
+    let languageList = Object.entries(languages)
+      .sort((a, b) => b[1] - a[1])          // biggest first
+      .slice(0, 5)                          // top 5
+      .map(([lang]) => `${getLanguageEmoji(lang)} ${lang}`)
+      .join(", ");
 
-// Fallback 1: use GitHub’s primary language if /languages is empty
-if (!languageList && repoInfo.language) {
-  languageList = `${getLanguageEmoji(repoInfo.language)} ${repoInfo.language}`;
+    // Fallback 1: GitHub's primary language if /languages is empty
+    if (!languageList && repoInfo.language) {
+      languageList = `${getLanguageEmoji(repoInfo.language)} ${repoInfo.language}`;
+    }
+
+    // Fallback 2: explicit message if absolutely nothing detected
+    if (!languageList) {
+      languageList = "⚠️ No code detected";
+    }
+
+    return {
+      lastCommit: lastHuman,
+      stars: repoInfo.stargazers_count ?? 0,
+      language: languageList,
+    };
+  } catch (err) {
+    console.error(`[${repoName}] Metadata fetch failed:`, err);
+    return { lastCommit: null, stars: 0, language: "❌" };
+  }
 }
-
-// Fallback 2: explicit "No code detected" if absolutely nothing
-if (!languageList) {
-  languageList = "⚠️ No code detected";
-}
-
-return {
-  lastCommit: lastHuman,
-  stars: repoInfo.stargazers_count ?? 0,
-  language: languageList
-};
-
 
 /* ---------- Other utilities ---------- */
 function getActivityStatus(lastRunDate) {
