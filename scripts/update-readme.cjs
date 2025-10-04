@@ -209,6 +209,15 @@ async function buildTable() {
     process.exitCode = 1; // fail the job so you see it
     return;
   }
+  // Sanity: exactly one marker pair?
+  const startCount = (readme.match(/<!-- CI-BADGE-START -->/g) || []).length;
+  const endCount   = (readme.match(/<!-- CI-BADGE-END -->/g) || []).length;
+  console.log(`[marker] START=${startCount} END=${endCount}`);
+  if (startCount !== 1 || endCount !== 1) {
+    console.error("❌ Expected exactly one CI-BADGE block in README.md.");
+    process.exit(1);
+  }
+
   
   const updated = readme.replace(blockRegex, markdown);
   
