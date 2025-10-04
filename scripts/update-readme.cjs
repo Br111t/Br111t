@@ -14,20 +14,28 @@ async function gh(url) {
 }
 
 function isMyCommit(c) {
-  return (c.author?.login || "").toLowerCase() === "br111t";
+  const login = (c.author?.login || "").toLowerCase();
+  const name  = (c.commit?.author?.name || "").toLowerCase();
+  const email = (c.commit?.author?.email || "").toLowerCase();
+
+  return login === "br111t" ||
+         name.includes("brittany") || name.includes("bales") || name.includes("br111t") ||
+         email.endsWith("@users.noreply.github.com"); // keeps it permissive for your noreply
 }
 
 function isBotCommit(c) {
-  const login = c.author?.login?.toLowerCase() || "";
-  const name  = c.commit?.committer?.name?.toLowerCase() || "";
+  const login = (c.author?.login || "").toLowerCase();
   const msg   = (c.commit?.message || "").toLowerCase();
+  const email = (c.commit?.author?.email || "").toLowerCase();
 
-  return login.endsWith("[bot]") ||
-         login === "github-actions[bot]" ||
-         name.includes("github") ||
-         msg.includes("dependabot") ||
-         msg.includes("auto-update ci status badge") ||
-         msg.includes("update badges");
+  // Known bot patterns (keep it narrow)
+  if (login.endsWith("[bot]")) return true;
+  if (login === "github-actions[bot]") return true;
+  if (msg.includes("dependabot")) return true;
+  if (email.startsWith("noreply+dependabot@")) return true;
+
+  // Do NOT block just because committer/author name contains "GitHub"
+  return false;
 }
 
 async function lastHumanCommitDate(owner, repo, pages = 3) {
@@ -38,17 +46,15 @@ async function lastHumanCommitDate(owner, repo, pages = 3) {
     const list = await gh(`https://api.github.com/repos/${owner}/${repo}/commits?sha=${def}&per_page=100&page=${page}`);
     if (!Array.isArray(list) || list.length === 0) break;
     
-        // 1) Prefer YOUR commit (not a bot)
+    // 1) Prefer your commit (not a bot)
     let chosen = list.find(c => isMyCommit(c) && !isBotCommit(c));
-
-        // 2) Fallback: any non-bot commit
+    
+    // 2) Fallback: any non-bot commit
     if (!chosen) chosen = list.find(c => !isBotCommit(c));
     
-    if (chosen) {
-      const d = new Date(chosen.commit.committer.date);
-      console.log(`[activity] ${owner}/${repo} -> ${d.toISOString()} by ${chosen.author?.login} | "${(chosen.commit?.message || "").slice(0,80)}"`);
-      return d;
-    }
+    // 3) Last resort: take the first commit on the branch (it’s still human activity)
+    if (!chosen) chosen = list[0];
+    
   }
   console.log(`[activity] ${owner}/${repo} -> no qualifying commits found on ${def}`);
   return null;
