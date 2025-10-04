@@ -39,7 +39,6 @@
 > 🟢 Active (within 14 days)  
 > ❄️ Cold (no commits in 14+ days)  
 > ❄️ Cold 📉 (if inactive for over 30 days)   
-> ❌ No Data
 
 
 ### 🛠️ Toolbox
