@@ -25,14 +25,14 @@
 
 #### 📋 CI Status Dashboard
 <!-- CI-BADGE-START -->
-  _Last updated: 2025-10-04 21:22:40.413 UTC_
+  _Last updated: 2025-10-04 21:29:39.188 UTC_
   
   | Project | CI Status | Activity | ⭐ Stars | 🧠 Language |
 |---------|-----------|----------|---------|-------------|
-  | [notebook-to-prod-template](https://github.com/Br111t/notebook-to-prod-template) | ![CI](https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main) | ❄️ Cold 📉 | ⭐ 2 | 📓 Jupyter Notebook, 🐍 Python, 🐳 Dockerfile,  PowerShell |
-| [finrisk-sim-svc](https://github.com/Br111t/finrisk-sim-svc) | 🚧 Pending | ❌ No Data | ⭐ 1 | ❌ |
+  | [finrisk-sim-svc](https://github.com/Br111t/finrisk-sim-svc) | 🚧 Pending | ❌ No Data | ⭐ 1 | ❌ |
 | [wellsrag-advisor](https://github.com/Br111t/wellsrag-advisor) | 🚧 Pending | ❌ No Data | ⭐ 1 | ❌ |
 | [agent-ops](https://github.com/Br111t/agent-ops) | ![CI](https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main) | ❌ No Data | ⭐ 1 | 🐍 Python |
+| [notebook-to-prod-template](https://github.com/Br111t/notebook-to-prod-template) | ![CI](https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main) | ❌ No Data | ⭐ 2 | 📓 Jupyter Notebook, 🐍 Python, 🐳 Dockerfile,  PowerShell |
   <!-- CI-BADGE-END -->
 
 > 🔥 Heating Up (commits within 7 days)  
