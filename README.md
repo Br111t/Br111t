@@ -25,12 +25,12 @@
 
 #### 📋 CI Status Dashboard
 <!-- CI-BADGE-START -->
-  _Last updated: 2025-10-04 21:39:04.101 UTC_
+  _Last updated: 2025-10-04 21:47:44.527 UTC_
   
   | Project | CI Status | Activity | ⭐ Stars | 🧠 Language |
 |---------|-----------|----------|---------|-------------|
-  | [finrisk-sim-svc](https://github.com/Br111t/finrisk-sim-svc) | 🚧 Pending | ❄️ Cold 📉 | ⭐ 1 | ❌ |
-| [wellsrag-advisor](https://github.com/Br111t/wellsrag-advisor) | 🚧 Pending | ❄️ Cold 📉 | ⭐ 1 | ❌ |
+  | [finrisk-sim-svc](https://github.com/Br111t/finrisk-sim-svc) | 🚧 Pending | ❄️ Cold 📉 | ⭐ 1 | ⚠️ No code detected |
+| [wellsrag-advisor](https://github.com/Br111t/wellsrag-advisor) | 🚧 Pending | ❄️ Cold 📉 | ⭐ 1 | ⚠️ No code detected |
 | [agent-ops](https://github.com/Br111t/agent-ops) | ![CI](https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main) | ❄️ Cold 📉 | ⭐ 1 | 🐍 Python |
 | [notebook-to-prod-template](https://github.com/Br111t/notebook-to-prod-template) | ![CI](https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main) | ❄️ Cold 📉 | ⭐ 2 | 📓 Jupyter Notebook, 🐍 Python, 🐳 Dockerfile, 🪟 PowerShell |
   <!-- CI-BADGE-END -->
