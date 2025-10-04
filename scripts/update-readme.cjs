@@ -193,10 +193,14 @@ async function buildTable() {
     )
     .join("\n");
 
+  const stamp = new Date().toISOString().replace('T',' ').replace('Z',' UTC');
   const markdown = `<!-- CI-BADGE-START -->
+  _Last updated: ${stamp}_
+  
   ${tableHeader}
   ${tableRows}
   <!-- CI-BADGE-END -->`;
+
   
   // --- write README block and report if it changed ---
   const readme = fs.readFileSync("README.md", "utf8");
