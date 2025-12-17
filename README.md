@@ -48,7 +48,8 @@
 ### 📚 Parallel Learning Track
 
 While my main focus is building agentic and AI-driven systems, I also maintain a 📘 [Coursework Archive](https://github.com/Coursework-Archive) to support continuous learning and skill development.
-
+<!-- COURSEWORK-START -->
+<!-- COURSEWORK-END -->
 | Track | Last Activity |
 |-------|---------------|
 | [python-coursework](https://github.com/Coursework-Archive/python-coursework) | ![Last Commit](https://img.shields.io/github/last-commit/Coursework-Archive/python-coursework?label=last%20commit&style=flat-square) |
