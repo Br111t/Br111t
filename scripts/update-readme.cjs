@@ -38,6 +38,24 @@ function isBotCommit(c) {
   return false;
 }
 
+async function listOrgRepos(org, pages = 3) {
+  const all = [];
+  for (let page = 1; page <= pages; page++) {
+    const batch = await gh(`https://api.github.com/orgs/${org}/repos?per_page=100&page=${page}&type=all&sort=updated`);
+    if (!Array.isArray(batch) || batch.length === 0) break;
+    all.push(...batch);
+    if (batch.length < 100) break;
+  }
+  return all;
+}
+
+function isWithinDays(dateStrOrDate, days) {
+  if (!dateStrOrDate) return false;
+  const d = (dateStrOrDate instanceof Date) ? dateStrOrDate : new Date(dateStrOrDate);
+  const now = new Date();
+  return (now - d) <= days * 24 * 60 * 60 * 1000;
+}
+
 async function lastHumanCommitDate(owner, repo, pages = 3) {
   const info = await gh(`https://api.github.com/repos/${owner}/${repo}`);
   const def = info.default_branch || "main";
@@ -172,13 +190,13 @@ function getActivityRank(activity) {
 }
 
 /* ---------- Build README table ---------- */
-async function buildTable() {
+/* ---------- Build Projects table block ---------- */
+async function buildProjectsBlock() {
   const enrichedRepos = [];
 
   for (const repo of repos) {
     const meta = await getRepoMetadata(repo.name);
 
-    // DEBUG: show what commit/date we’re classifying
     console.log(
       `[activity] using ${repo.name} lastCommit=`,
       meta.lastCommit ? meta.lastCommit.toISOString() : "null"
@@ -186,6 +204,7 @@ async function buildTable() {
 
     const activity = getActivityStatus(meta.lastCommit);
     console.log(`[activity] ${repo.name} classified as: ${activity}`);
+
     const ciExists = await checkBadgeExists(repo.ci);
     const ciStatus = ciExists ? `![CI](${repo.ci})` : "🚧 Pending";
 
@@ -202,8 +221,8 @@ async function buildTable() {
     return `⭐ ${stars}`;
   }
 
-const tableHeader =
-  `| Project | CI | Activity |${hasStars ? " ⭐ Stars |" : ""} Lang |
+  const tableHeader =
+`| Project | CI | Activity |${hasStars ? " ⭐ Stars |" : ""} Lang |
 |---------|----|----------|${hasStars ? "---------|" : ""}------|`;
 
   const tableRows = enrichedRepos
@@ -225,47 +244,79 @@ const tableHeader =
     )
     .join("\n");
 
-  const stamp = new Date().toISOString().replace('T',' ').replace('Z',' UTC');
-  const markdown = `<!-- CI-BADGE-START -->
-  _Last updated: ${stamp}_
-  
-  ${tableHeader}
-  ${tableRows}
-  <!-- CI-BADGE-END -->`;
+  const stamp = new Date().toISOString().replace("T", " ").replace("Z", " UTC");
 
-  
-  // --- write README block and report if it changed ---
-  const readme = fs.readFileSync("README.md", "utf8");
-  
-  const blockRegex = /<!-- CI-BADGE-START -->[\s\S]*<!-- CI-BADGE-END -->/;
-  if (!blockRegex.test(readme)) {
-    console.error("❌ Marker block not found in README.md. Make sure README contains:");
-    console.error("   <!-- CI-BADGE-START -->");
-    console.error("   <!-- CI-BADGE-END -->");
-    process.exitCode = 1; // fail the job so you see it
-    return;
+  return `<!-- CI-BADGE-START -->
+_Last updated: ${stamp}_
+
+${tableHeader}
+${tableRows}
+<!-- CI-BADGE-END -->`;
+}
+
+/* ---------- Build Coursework table block ---------- */
+async function buildCourseworkBlock({ org = "Coursework-Archive", windowDays = 60 } = {}) {
+  const orgRepos = await listOrgRepos(org);
+
+  const active = orgRepos
+    .filter(r => isWithinDays(r.pushed_at, windowDays))
+    .sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at));
+
+  if (active.length === 0) {
+    return `<!-- COURSEWORK-START -->\n_No coursework repo pushes in the last ${windowDays} days._\n<!-- COURSEWORK-END -->`;
   }
-  // Sanity: exactly one marker pair?
-  const startCount = (readme.match(/<!-- CI-BADGE-START -->/g) || []).length;
-  const endCount   = (readme.match(/<!-- CI-BADGE-END -->/g) || []).length;
-  console.log(`[marker] START=${startCount} END=${endCount}`);
-  if (startCount !== 1 || endCount !== 1) {
-    console.error("❌ Expected exactly one CI-BADGE block in README.md.");
+
+  const header =
+`<!-- COURSEWORK-START -->
+| Track | Last Activity |
+|-------|---------------|`;
+
+  const rows = active.map(r => {
+    const name = r.name;
+    const url = r.html_url;
+    const badge = `https://img.shields.io/github/last-commit/${org}/${name}?label=last%20commit&style=flat-square`;
+    return `| [${name}](${url}) | ![Last Commit](${badge}) |`;
+  }).join("\n");
+
+  return `${header}\n${rows}\n<!-- COURSEWORK-END -->`;
+}
+
+/* ---------- Main runner ---------- */
+async function main() {
+  const readmePath = "README.md";
+  const readme = fs.readFileSync(readmePath, "utf8");
+
+  // Ensure markers exist
+  const ciRegex = /<!-- CI-BADGE-START -->[\s\S]*<!-- CI-BADGE-END -->/;
+  const cwRegex = /<!-- COURSEWORK-START -->[\s\S]*<!-- COURSEWORK-END -->/;
+
+  if (!ciRegex.test(readme)) {
+    console.error("❌ Missing CI markers in README: <!-- CI-BADGE-START --> ... <!-- CI-BADGE-END -->");
+    process.exit(1);
+  }
+  if (!cwRegex.test(readme)) {
+    console.error("❌ Missing coursework markers in README: <!-- COURSEWORK-START --> ... <!-- COURSEWORK-END -->");
     process.exit(1);
   }
 
-  
-  const updated = readme.replace(blockRegex, markdown);
-  
+  const [projectsBlock, courseworkBlock] = await Promise.all([
+    buildProjectsBlock(),
+    buildCourseworkBlock({ org: "Coursework-Archive", windowDays: 60 })
+  ]);
+
+  let updated = readme.replace(ciRegex, projectsBlock);
+  updated = updated.replace(cwRegex, courseworkBlock);
+
   if (updated === readme) {
-    console.log("ℹ️ README block unchanged (no content diff).");
-  } else {
-    fs.writeFileSync("README.md", updated);
-    console.log("✅ README updated with CI, activity, stars, and language metadata.");
+    console.log("ℹ️ README unchanged.");
+    return;
   }
+
+  fs.writeFileSync(readmePath, updated);
+  console.log("✅ README updated (projects + coursework).");
 }
 
-buildTable().catch(err => {
+main().catch(err => {
   console.error("❌ update-readme failed:", err);
   process.exit(1);
 });
