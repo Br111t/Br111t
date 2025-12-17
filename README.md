@@ -25,7 +25,7 @@
 
 #### 📋 CI Status Dashboard
 <!-- CI-BADGE-START -->
-_Last updated: 2025-12-17 00:26:37.719 UTC_
+_Last updated: 2025-12-17 00:34:07.611 UTC_
 
 | Project | CI | Activity | ⭐ Stars | Lang |
 |---------|----|----------|---------|------|
@@ -51,7 +51,6 @@ While my main focus is building agentic and AI-driven systems, I also maintain a
 <!-- COURSEWORK-START -->
 | Track | Last Activity |
 |-------|---------------|
-| [.github](https://github.com/Coursework-Archive/.github) | ![Last Commit](https://img.shields.io/github/last-commit/Coursework-Archive/.github?label=last%20commit&style=flat-square) |
 | [math-through-code](https://github.com/Coursework-Archive/math-through-code) | ![Last Commit](https://img.shields.io/github/last-commit/Coursework-Archive/math-through-code?label=last%20commit&style=flat-square) |
 <!-- COURSEWORK-END -->
 
