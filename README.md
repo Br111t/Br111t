@@ -54,12 +54,6 @@ While my main focus is building agentic and AI-driven systems, I also maintain a
 | [.github](https://github.com/Coursework-Archive/.github) | ![Last Commit](https://img.shields.io/github/last-commit/Coursework-Archive/.github?label=last%20commit&style=flat-square) |
 | [math-through-code](https://github.com/Coursework-Archive/math-through-code) | ![Last Commit](https://img.shields.io/github/last-commit/Coursework-Archive/math-through-code?label=last%20commit&style=flat-square) |
 <!-- COURSEWORK-END -->
-| Track | Last Activity |
-|-------|---------------|
-| [python-coursework](https://github.com/Coursework-Archive/python-coursework) | ![Last Commit](https://img.shields.io/github/last-commit/Coursework-Archive/python-coursework?label=last%20commit&style=flat-square) |
-| [sql-fundamentals](https://github.com/Coursework-Archive/sql-fundamentals) | ![Last Commit](https://img.shields.io/github/last-commit/Coursework-Archive/sql-fundamentals?label=last%20commit&style=flat-square) |
-| [java-core-fundamentals](https://github.com/Coursework-Archive/java-core-fundamentals) | ![Last Commit](https://img.shields.io/github/last-commit/Coursework-Archive/java-core-fundamentals?label=last%20commit&style=flat-square) |
-| [web-dev-coursework](https://github.com/Coursework-Archive/web-dev-coursework) | ![Last Commit](https://img.shields.io/github/last-commit/Coursework-Archive/web-dev-coursework?label=last%20commit&style=flat-square) |
 
 💡 Coursework is version-controlled and archived for reference at [@Coursework-Archive](https://github.com/Coursework-Archive).
 
