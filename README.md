@@ -25,15 +25,15 @@
 
 #### 📋 CI Status Dashboard
 <!-- CI-BADGE-START -->
-  _Last updated: 2025-12-15 04:41:23.255 UTC_
-  
-  | Project | CI | Activity | ⭐ Stars | Lang |
+_Last updated: 2025-12-17 00:26:37.719 UTC_
+
+| Project | CI | Activity | ⭐ Stars | Lang |
 |---------|----|----------|---------|------|
-  | [finrisk-sim-svc](https://github.com/Br111t/finrisk-sim-svc) | 🚧 Pending | ❄️ Cold 📉 | ⭐ 1 | ⚠️ No code detected |
+| [finrisk-sim-svc](https://github.com/Br111t/finrisk-sim-svc) | 🚧 Pending | ❄️ Cold 📉 | ⭐ 1 | ⚠️ No code detected |
 | [wellsrag-advisor](https://github.com/Br111t/wellsrag-advisor) | 🚧 Pending | ❄️ Cold 📉 | ⭐ 1 | ⚠️ No code detected |
 | [agent-ops](https://github.com/Br111t/agent-ops) | ![CI](https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main) | ❄️ Cold 📉 | ⭐ 1 | 🐍 Python |
 | [notebook-to-prod-template](https://github.com/Br111t/notebook-to-prod-template) | ![CI](https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main) | ❄️ Cold 📉 | ⭐ 2 | 📓 Jupyter Notebook, 🐍 Python<br>🐳 Dockerfile, 🪟 PowerShell,  Smarty |
-  <!-- CI-BADGE-END -->
+<!-- CI-BADGE-END -->
 
 > 🔥 Heating Up (commits within 7 days)  
 > 🟢 Active (within 14 days)  
@@ -49,6 +49,10 @@
 
 While my main focus is building agentic and AI-driven systems, I also maintain a 📘 [Coursework Archive](https://github.com/Coursework-Archive) to support continuous learning and skill development.
 <!-- COURSEWORK-START -->
+| Track | Last Activity |
+|-------|---------------|
+| [.github](https://github.com/Coursework-Archive/.github) | ![Last Commit](https://img.shields.io/github/last-commit/Coursework-Archive/.github?label=last%20commit&style=flat-square) |
+| [math-through-code](https://github.com/Coursework-Archive/math-through-code) | ![Last Commit](https://img.shields.io/github/last-commit/Coursework-Archive/math-through-code?label=last%20commit&style=flat-square) |
 <!-- COURSEWORK-END -->
 | Track | Last Activity |
 |-------|---------------|
