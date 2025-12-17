@@ -2,6 +2,9 @@
 const fs = require("fs");
 const https = require("https");
 const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fetch(...args));
+const EXCLUDED_COURSEWORK_REPOS = new Set([
+  ".github"
+]);
 
 /* ---------- Config & helpers ---------- */
 const GH_TOKEN = process.env.GITHUB_TOKEN;
@@ -259,6 +262,7 @@ async function buildCourseworkBlock({ org = "Coursework-Archive", windowDays = 6
   const orgRepos = await listOrgRepos(org);
 
   const active = orgRepos
+    .filter(r => !EXCLUDED_COURSEWORK_REPOS.has(r.name))
     .filter(r => isWithinDays(r.pushed_at, windowDays))
     .sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at));
 
