@@ -25,14 +25,14 @@
 
 #### 📋 CI Status Dashboard
 <!-- CI-BADGE-START -->
-_Last updated: 2026-07-11 19:04:48.181 UTC_
+_Last updated: 2026-07-11 20:57:50.751 UTC_
 
-| Project | CI | Activity | ⭐ Stars | Lang |
-|---------|----|----------|---------|------|
-| [finrisk-sim-svc](https://github.com/Br111t/finrisk-sim-svc) | 🚧 Pending | 🔥 Heating Up | ⭐ 1 | ⚠️ No code detected |
-| [regulatory-evidence-eval](https://github.com/Br111t/regulatory-evidence-eval) | 🚧 Pending | 🔥 Heating Up | ⭐ 1 | ⚠️ No code detected |
-| [agent-ops](https://github.com/Br111t/agent-ops) | ![CI](https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main) | 🔥 Heating Up | ⭐ 1 | 🐍 Python |
-| [notebook-to-prod-template](https://github.com/Br111t/notebook-to-prod-template) | ![CI](https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main) | ❄️ Cold 📉 | ⭐ 2 | 📓 Jupyter Notebook, 🐍 Python<br>🐳 Dockerfile, 🪟 PowerShell,  Smarty |
+| Project | Status | CI | Activity | ⭐ Stars | Lang |
+|---------|--------|----|----------|---------|------|
+| [agent-ops](https://github.com/Br111t/agent-ops) | 🚧 Active Build | ![CI](https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main) | 🔥 Heating Up | ⭐ 1 | 🐍 Python |
+| [notebook-to-prod-template](https://github.com/Br111t/notebook-to-prod-template) | ✅ Complete | ![CI](https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main) | ❄️ Cold 📉 | ⭐ 2 | 📓 Jupyter Notebook, 🐍 Python<br>🐳 Dockerfile, 🪟 PowerShell,  Smarty |
+| [finrisk-sim-svc](https://github.com/Br111t/finrisk-sim-svc) | 🧭 Planned | — Not configured | 🔥 Heating Up | ⭐ 1 | ⚠️ No code detected |
+| [regulatory-evidence-eval](https://github.com/Br111t/regulatory-evidence-eval) | 🧭 Planned | — Not configured | 🔥 Heating Up | ⭐ 1 | ⚠️ No code detected |
 <!-- CI-BADGE-END -->
 
 > 🔥 Heating Up (commits within 7 days)  
