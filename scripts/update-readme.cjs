@@ -138,9 +138,9 @@ const repos = [
   { name: "finrisk-sim-svc",
     ci: "https://github.com/Br111t/finrisk-sim-svc/actions/workflows/ci.yml/badge.svg?branch=main",
     url: "https://github.com/Br111t/finrisk-sim-svc" },
-  { name: "wellsrag-advisor",
-    ci: "https://github.com/Br111t/wellsrag-advisor/actions/workflows/ci.yml/badge.svg?branch=main",
-    url: "https://github.com/Br111t/wellsrag-advisor" },
+  { name: "regulatory-evidence-eval",
+  ci: "https://github.com/Br111t/regulatory-evidence-eval/actions/workflows/ci.yml/badge.svg?branch=main",
+  url: "https://github.com/Br111t/regulatory-evidence-eval" },
 ];
 
 /* ---------- metadata fetch ---------- */
