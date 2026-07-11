@@ -63,11 +63,6 @@ While my main focus is building agentic and AI-driven systems, I also maintain a
 
 💡 Coursework is version-controlled and archived for reference at [@Coursework-Archive](https://github.com/Coursework-Archive).
 
-
-
-### 📈 GitHub Stats
-![Brittany’s GitHub stats](https://github-readme-stats.vercel.app/api?username=Br111t&show_icons=true&hide_border=true)
-
 ---
 
 
