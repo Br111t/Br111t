@@ -1,29 +1,36 @@
 <!-- headline -->
 <h1 align="center">
-  Java&nbsp;+&nbsp;Python Engineer&nbsp;@&nbsp;Wells&nbsp;Fargo&nbsp;| Agentic&nbsp;AI&nbsp;for Financial&nbsp;Ops
+  Software Engineer&nbsp;@&nbsp;Wells&nbsp;Fargo&nbsp;| Python&nbsp;•&nbsp;Java&nbsp;•&nbsp;Agentic&nbsp;&amp;&nbsp;Generative&nbsp;AI&nbsp;for&nbsp;Financial&nbsp;Ops
 </h1>
 
 <p align="center">
-  <!-- profile views -->
-  <img src="https://komarev.com/ghpvc/?username=Br111t&style=flat-square" alt="profile views"/>
+  <img
+    src="https://komarev.com/ghpvc/?username=Br111t&style=flat-square"
+    alt="profile views"
+  />
 
-  <!-- LinkedIn badge (image = no underline) -->
   <a href="https://www.linkedin.com/in/1blb/">
-    <img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/>
+    <img
+      src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat-square&logo=linkedin&logoColor=white"
+      alt="LinkedIn"
+    />
   </a>
 </p>
 
-### 👋 About&nbsp;Me
-* **Role:** Software Engineer (COO Technology), Wells Fargo  
-* **Focus:** multi-agent LLM orchestration, GenAI tooling, risk & compliance platforms  
-* **Languages:** Java (Spring Boot), Python (LangChain, FastAPI), SQL, Bash  
-### 🚧 Currently Building
-- 📦 **[notebook-to-prod-template](https://github.com/Br111t/notebook-to-prod-template)** – CI-ready FastAPI microservice scaffold from Jupyter notebooks 
-- 🧠 **Agent-Ops** – self-healing log triage with AutoGen agents  
-- 📄 **WellsRAG-Advisor** – retrieval-augmented QA over regulatory docs  
-- 📊 **FinRisk-Sim-Svc** – Monte-Carlo VaR microservice (Java + Python explainability)
+### 👋 About Me
 
-#### 📋 CI Status Dashboard
+- **Role:** Software Engineer, COO Technology at Wells Fargo
+- **Focus:** Agentic and Generative AI, AI evaluation, repository-aware systems, reliability, and financial operations
+- **Engineering foundation:** Python, Java, SQL, FastAPI, Pydantic, Playwright, Allure, GitHub Actions, and data-driven architecture
+- **Strengths:** Systems thinking, failure analysis, reusable architecture, deep technical follow-through, and evidence-based problem solving
+
+### 🚧 Current Focus
+
+- 🧠 **[Agent-Ops](https://github.com/Br111t/agent-ops)** — repository-aware AI evaluation and reliability system for approved test execution, artifact analysis, failure classification, and evidence-supported recommendations
+
+Completed and planned portfolio work is summarized in the dashboard below.
+
+### 📋 Portfolio Status Dashboard
 <!-- CI-BADGE-START -->
 _Last updated: 2026-07-11 20:57:50.751 UTC_
 
