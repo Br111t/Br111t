@@ -127,8 +127,7 @@ function languageListToTwoLines(languagesObj, primaryFromRepo) {
   return `${firstLine}<br>${secondLine}`;
 }
 
-/* ---------- Repos to show ---------- */
-const repos = [
+
 /* ---------- Repos to show ---------- */
 const repos = [
   {
@@ -155,7 +154,6 @@ const repos = [
     ci: null,
     url: "https://github.com/Br111t/finrisk-sim-svc"
   }
-];
 ];
 
 /* ---------- metadata fetch ---------- */
