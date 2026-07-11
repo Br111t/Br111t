@@ -129,18 +129,33 @@ function languageListToTwoLines(languagesObj, primaryFromRepo) {
 
 /* ---------- Repos to show ---------- */
 const repos = [
-  { name: "notebook-to-prod-template",
-    ci: "https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main",
-    url: "https://github.com/Br111t/notebook-to-prod-template" },
-  { name: "agent-ops",
+/* ---------- Repos to show ---------- */
+const repos = [
+  {
+    name: "agent-ops",
+    status: "🚧 Active Build",
     ci: "https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main",
-    url: "https://github.com/Br111t/agent-ops" },
-  { name: "finrisk-sim-svc",
-    ci: "https://github.com/Br111t/finrisk-sim-svc/actions/workflows/ci.yml/badge.svg?branch=main",
-    url: "https://github.com/Br111t/finrisk-sim-svc" },
-  { name: "regulatory-evidence-eval",
-  ci: "https://github.com/Br111t/regulatory-evidence-eval/actions/workflows/ci.yml/badge.svg?branch=main",
-  url: "https://github.com/Br111t/regulatory-evidence-eval" },
+    url: "https://github.com/Br111t/agent-ops"
+  },
+  {
+    name: "notebook-to-prod-template",
+    status: "✅ Complete",
+    ci: "https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main",
+    url: "https://github.com/Br111t/notebook-to-prod-template"
+  },
+  {
+    name: "regulatory-evidence-eval",
+    status: "🧭 Planned",
+    ci: null,
+    url: "https://github.com/Br111t/regulatory-evidence-eval"
+  },
+  {
+    name: "finrisk-sim-svc",
+    status: "🧭 Planned",
+    ci: null,
+    url: "https://github.com/Br111t/finrisk-sim-svc"
+  }
+];
 ];
 
 /* ---------- metadata fetch ---------- */
@@ -192,6 +207,12 @@ function getActivityRank(activity) {
   return 3;
 }
 
+function getProjectStatusRank(status) {
+  if (status.includes("Active Build")) return 0;
+  if (status.includes("Complete")) return 1;
+  if (status.includes("Planned")) return 2;
+  return 3;
+}
 /* ---------- Build README table ---------- */
 /* ---------- Build Projects table block ---------- */
 async function buildProjectsBlock() {
@@ -208,8 +229,12 @@ async function buildProjectsBlock() {
     const activity = getActivityStatus(meta.lastCommit);
     console.log(`[activity] ${repo.name} classified as: ${activity}`);
 
-    const ciExists = await checkBadgeExists(repo.ci);
-    const ciStatus = ciExists ? `![CI](${repo.ci})` : "🚧 Pending";
+    let ciStatus = "— Not configured";
+    
+    if (repo.ci) {
+      const ciExists = await checkBadgeExists(repo.ci);
+      ciStatus = ciExists ? `![CI](${repo.ci})` : "🚧 Pending";
+    }
 
     enrichedRepos.push({ ...repo, ...meta, activity, ciStatus });
   }
@@ -224,24 +249,46 @@ async function buildProjectsBlock() {
     return `⭐ ${stars}`;
   }
 
-  const tableHeader =
-`| Project | CI | Activity |${hasStars ? " ⭐ Stars |" : ""} Lang |
-|---------|----|----------|${hasStars ? "---------|" : ""}------|`;
+const tableHeader =
+`| Project | Status | CI | Activity |${hasStars ? " ⭐ Stars |" : ""} Lang |
+|---------|--------|----|----------|${hasStars ? "---------|" : ""}------|`;
 
-  const tableRows = enrichedRepos
-    .sort((a, b) => {
-      const rankA = getActivityRank(a.activity);
-      const rankB = getActivityRank(b.activity);
-      if (rankA !== rankB) return rankA - rankB;
+const tableRows = enrichedRepos
+  .sort((a, b) => {
+    const statusRankA = getProjectStatusRank(a.status);
+    const statusRankB = getProjectStatusRank(b.status);
 
-      const ciA = a.ciStatus.includes("passing") ? 0 : a.ciStatus.includes("Pending") ? 1 : 2;
-      const ciB = b.ciStatus.includes("passing") ? 0 : b.ciStatus.includes("Pending") ? 1 : 2;
-      if (ciA !== ciB) return ciA - ciB;
+    if (statusRankA !== statusRankB) {
+      return statusRankA - statusRankB;
+    }
 
-      return a.name.localeCompare(b.name);
-    })
+    const rankA = getActivityRank(a.activity);
+    const rankB = getActivityRank(b.activity);
+
+    if (rankA !== rankB) {
+      return rankA - rankB;
+    }
+
+    const ciA = a.ciStatus.includes("passing")
+      ? 0
+      : a.ciStatus.includes("Pending")
+        ? 1
+        : 2;
+
+    const ciB = b.ciStatus.includes("passing")
+      ? 0
+      : b.ciStatus.includes("Pending")
+        ? 1
+        : 2;
+
+    if (ciA !== ciB) {
+      return ciA - ciB;
+    }
+
+    return a.name.localeCompare(b.name);
+  })
     .map(repo =>
-      `| [${repo.name}](${repo.url}) | ${repo.ciStatus} | ${repo.activity} |${
+      `| [${repo.name}](${repo.url}) | ${repo.status} | ${repo.ciStatus} | ${repo.activity} |${
         hasStars ? ` ${formatStars(repo.stars, repo.lastCommit)} |` : ""
       } ${repo.language} |`
     )
