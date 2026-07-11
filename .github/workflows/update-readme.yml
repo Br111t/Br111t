@@ -3,34 +3,39 @@ name: Update Profile README with CI Status
 on:
   schedule:
     # Every Monday at 04:00 UTC
-    - cron: '0 4 * * 1'
+    - cron: "0 4 * * 1"
   workflow_dispatch:
 
 permissions:
-  contents: write    # allow commit + push of README.md
+  contents: write
 
 concurrency:
   group: update-profile-readme
   cancel-in-progress: true
-  
+
 jobs:
   update-readme:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          # explicitly tell checkout to use the GITHUB_TOKEN for git operations
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
+          ref: main
+
+      - name: Sync with latest main
+        run: git pull --ff-only origin main
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run update-readme script
         env:
@@ -44,16 +49,9 @@ jobs:
 
           git add README.md
 
-          echo "git status after add:"
-          git status --porcelain
-
           if git diff --cached --quiet; then
             echo "No staged changes to commit."
           else
             git commit -m "chore: auto-update profile project status"
-
-            # Incorporate changes pushed while this workflow was running.
-            git pull --rebase origin main
-
             git push origin HEAD:main
           fi
