@@ -48,8 +48,9 @@ _Last updated: 2026-07-11 20:57:50.751 UTC_
 > ❄️ Cold 📉 (if inactive for over 30 days)   
 
 
-### 🛠️ Toolbox
-`Java` • `Spring Boot` • `Python` • `LangChain` • `Docker` • `GitHub Actions` • `Kubernetes` • `Terraform`
+### 🛠️ Engineering Toolbox
+
+`Python` • `Java` • `SQL` • `Spring Boot` • `FastAPI` • `Pydantic` • `Playwright` • `pytest` • `SQLite` • `pandas` • `Allure` • `GitHub Actions` • `Docker`
 
 
 ### 📚 Parallel Learning Track
