@@ -32,14 +32,14 @@ Completed and planned portfolio work is summarized in the dashboard below.
 
 ### 📋 Portfolio Status Dashboard
 <!-- CI-BADGE-START -->
-_Last updated: 2026-07-13 06:53:08.566 UTC_
+_Last updated: 2026-07-20 06:47:00.825 UTC_
 
 | Project | Status | CI | Activity | ⭐ Stars | Lang |
 |---------|--------|----|----------|---------|------|
 | [agent-ops](https://github.com/Br111t/agent-ops) | 🚧 Active Build | ![CI](https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main) | 🔥 Heating Up | ⭐ 1 | 🐍 Python |
 | [notebook-to-prod-template](https://github.com/Br111t/notebook-to-prod-template) | ✅ Complete | ![CI](https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main) | ❄️ Cold 📉 | ⭐ 2 | 📓 Jupyter Notebook, 🐍 Python<br>🐳 Dockerfile, 🪟 PowerShell,  Smarty |
-| [finrisk-sim-svc](https://github.com/Br111t/finrisk-sim-svc) | 🧭 Planned | — Not configured | 🔥 Heating Up | ⭐ 1 | ⚠️ No code detected |
-| [regulatory-evidence-eval](https://github.com/Br111t/regulatory-evidence-eval) | 🧭 Planned | — Not configured | 🔥 Heating Up | ⭐ 1 | ⚠️ No code detected |
+| [finrisk-sim-svc](https://github.com/Br111t/finrisk-sim-svc) | 🧭 Planned | — Not configured | 🟢 Active | ⭐ 1 | ⚠️ No code detected |
+| [regulatory-evidence-eval](https://github.com/Br111t/regulatory-evidence-eval) | 🧭 Planned | — Not configured | 🟢 Active | ⭐ 1 | ⚠️ No code detected |
 <!-- CI-BADGE-END -->
 
 > 🔥 Heating Up (commits within 7 days)  
