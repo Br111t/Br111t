@@ -32,11 +32,11 @@ Completed and planned portfolio work is summarized in the dashboard below.
 
 ### 📋 Portfolio Status Dashboard
 <!-- CI-BADGE-START -->
-_Last updated: 2026-07-27 07:32:09.935 UTC_
+_Last updated: 2026-08-03 07:27:50.620 UTC_
 
 | Project | Status | CI | Activity | ⭐ Stars | Lang |
 |---------|--------|----|----------|---------|------|
-| [agent-ops](https://github.com/Br111t/agent-ops) | 🚧 Active Build | ![CI](https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main) | 🔥 Heating Up | ⭐ 1 | 🐍 Python |
+| [agent-ops](https://github.com/Br111t/agent-ops) | 🚧 Active Build | ![CI](https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main) | 🟢 Active | ⭐ 1 | 🐍 Python |
 | [notebook-to-prod-template](https://github.com/Br111t/notebook-to-prod-template) | ✅ Complete | ![CI](https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main) | ❄️ Cold 📉 | ⭐ 2 | 📓 Jupyter Notebook, 🐍 Python<br>🐳 Dockerfile, 🪟 PowerShell,  Smarty |
 | [finrisk-sim-svc](https://github.com/Br111t/finrisk-sim-svc) | 🧭 Planned | — Not configured | ❄️ Cold | ⭐ 1 | ⚠️ No code detected |
 | [regulatory-evidence-eval](https://github.com/Br111t/regulatory-evidence-eval) | 🧭 Planned | — Not configured | ❄️ Cold | ⭐ 1 | ⚠️ No code detected |
@@ -59,8 +59,8 @@ While my main focus is building agentic and AI-driven systems, I also maintain a
 <!-- COURSEWORK-START -->
 | Track | Last Activity |
 |-------|---------------|
-| [agentic-ai-coursework](https://github.com/Coursework-Archive/agentic-ai-coursework) | ![Last Commit](https://img.shields.io/github/last-commit/Coursework-Archive/agentic-ai-coursework?label=last%20commit&style=flat-square) |
 | [math-through-code](https://github.com/Coursework-Archive/math-through-code) | ![Last Commit](https://img.shields.io/github/last-commit/Coursework-Archive/math-through-code?label=last%20commit&style=flat-square) |
+| [agentic-ai-coursework](https://github.com/Coursework-Archive/agentic-ai-coursework) | ![Last Commit](https://img.shields.io/github/last-commit/Coursework-Archive/agentic-ai-coursework?label=last%20commit&style=flat-square) |
 <!-- COURSEWORK-END -->
 
 💡 Coursework is version-controlled and archived for reference at [@Coursework-Archive](https://github.com/Coursework-Archive).
