@@ -32,7 +32,7 @@ Completed and planned portfolio work is summarized in the dashboard below.
 
 ### 📋 Portfolio Status Dashboard
 <!-- CI-BADGE-START -->
-_Last updated: 2026-09-14 09:38:14.211 UTC_
+_Last updated: 2026-09-21 09:41:52.578 UTC_
 
 | Project | Status | CI | Activity | ⭐ Stars | Lang |
 |---------|--------|----|----------|---------|------|
@@ -60,7 +60,6 @@ While my main focus is building agentic and AI-driven systems, I also maintain a
 | Track | Last Activity |
 |-------|---------------|
 | [math-through-code](https://github.com/Coursework-Archive/math-through-code) | ![Last Commit](https://img.shields.io/github/last-commit/Coursework-Archive/math-through-code?label=last%20commit&style=flat-square) |
-| [agentic-ai-coursework](https://github.com/Coursework-Archive/agentic-ai-coursework) | ![Last Commit](https://img.shields.io/github/last-commit/Coursework-Archive/agentic-ai-coursework?label=last%20commit&style=flat-square) |
 <!-- COURSEWORK-END -->
 
 💡 Coursework is version-controlled and archived for reference at [@Coursework-Archive](https://github.com/Coursework-Archive).
