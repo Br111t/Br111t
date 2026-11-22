@@ -1,83 +1,34 @@
-<!-- headline -->
-<h1 align="center">
-  Software Engineer&nbsp;@&nbsp;Wells&nbsp;Fargo&nbsp;| Python&nbsp;•&nbsp;Java&nbsp;•&nbsp;Agentic&nbsp;&amp;&nbsp;Generative&nbsp;AI&nbsp;for&nbsp;Financial&nbsp;Ops
-</h1>
+<h1 align="center">Software Engineer | Systems Thinking | AI Evaluation & Reliability</h1>
+
+<p align="center"><strong>Efficient AI architectures • Abstraction • Small language models • Python & Java</strong></p>
 
 <p align="center">
-  <img
-    src="https://komarev.com/ghpvc/?username=Br111t&style=flat-square"
-    alt="profile views"
-  />
-
-  <a href="https://www.linkedin.com/in/1blb/">
-    <img
-      src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat-square&logo=linkedin&logoColor=white"
-      alt="LinkedIn"
-    />
-  </a>
+  <a href="https://www.linkedin.com/in/1blb/"><img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
 </p>
 
-### 👋 About Me
+### About
 
-- **Role:** Software Engineer, COO Technology at Wells Fargo
-- **Focus:** Agentic and Generative AI, AI evaluation, repository-aware systems, reliability, and financial operations
-- **Engineering foundation:** Python, Java, SQL, FastAPI, Pydantic, Playwright, Allure, GitHub Actions, and data-driven architecture
-- **Strengths:** Systems thinking, failure analysis, reusable architecture, deep technical follow-through, and evidence-based problem solving
+Systems thinker and Software Engineer at **Wells Fargo**, focused on recognizing patterns, dependencies, and edge cases—and turning complex problems into reliable, efficient systems.
 
-### 🚧 Current Focus
+Engineering experience spans Python, Java, enterprise automation, data validation, and software reliability. Independent research explores **computational efficiency, abstraction-driven model design, representation learning, and generalization**.
 
-- 🧠 **[Agent-Ops](https://github.com/Br111t/agent-ops)** — repository-aware AI evaluation and reliability system for approved test execution, artifact analysis, failure classification, and evidence-supported recommendations
+> **Research question:** Can more capable intelligence emerge through better abstractions, efficient representations, and iterative reasoning rather than simply scaling computation?
 
-Completed and planned portfolio work is summarized in the dashboard below.
+### Current Research & Projects
 
-### 📋 Portfolio Status Dashboard
-<!-- CI-BADGE-START -->
-_Last updated: 2026-11-16 12:28:47.417 UTC_
+- **Grounded-QA** *(independent research; repository currently private)* — Small Python/PyTorch language models trained from scratch to investigate evidence-grounded question answering, answerability, generalization, and architectural trade-offs. Research is experimental, using narrow synthetic datasets rather than broad capability benchmarks.
+- **[Math Through Code](https://github.com/Coursework-Archive/math-through-code)** — UC Berkeley Extension calculus coursework, computational notebooks, mathematical references, and a reusable Python math library.
+- **[Agentic AI Coursework](https://github.com/Coursework-Archive/agentic-ai-coursework)** — Hands-on work in LLM evaluation, agentic workflows, FastAPI, and Python.
+- **[Agent-Ops](https://github.com/Br111t/agent-ops)** — Repository-aware AI evaluation and reliability tooling for test evidence, failure classification, and human-reviewed recommendations.
 
-| Project | Status | CI | Activity | ⭐ Stars | Lang |
-|---------|--------|----|----------|---------|------|
-| [agent-ops](https://github.com/Br111t/agent-ops) | 🚧 Active Build | ![CI](https://github.com/Br111t/agent-ops/actions/workflows/ci.yml/badge.svg?branch=main) | ❄️ Cold 📉 | ⭐ 1 | 🐍 Python |
-| [notebook-to-prod-template](https://github.com/Br111t/notebook-to-prod-template) | ✅ Complete | ![CI](https://github.com/Br111t/notebook-to-prod-template/actions/workflows/ci.yml/badge.svg?branch=main) | ❄️ Cold 📉 | ⭐ 2 | 📓 Jupyter Notebook, 🐍 Python<br>🐳 Dockerfile, 🪟 PowerShell,  Smarty |
-| [finrisk-sim-svc](https://github.com/Br111t/finrisk-sim-svc) | 🧭 Planned | — Not configured | ❄️ Cold 📉 | ⭐ 1 | ⚠️ No code detected |
-| [regulatory-evidence-eval](https://github.com/Br111t/regulatory-evidence-eval) | 🧭 Planned | — Not configured | ❄️ Cold 📉 | ⭐ 1 | ⚠️ No code detected |
-<!-- CI-BADGE-END -->
+### Technical Foundations
 
-> 🔥 Heating Up (commits within 7 days)  
-> 🟢 Active (within 14 days)  
-> ❄️ Cold (no commits in 14+ days)  
-> ❄️ Cold 📉 (if inactive for over 30 days)   
+**AI & evaluation:** Small language models, PyTorch, Transformers, grounded QA, experimental design, behavioral validation, human-in-the-loop evaluation
 
+**Software & data:** Python, Java, SQL, JavaScript, TypeScript, FastAPI, Spring Boot, SQLite, pandas
 
-### 🛠️ Engineering Toolbox
+**Reliability & architecture:** Playwright, pytest, Pydantic, Allure, CI/CD, automation, failure analysis
 
-`Python` • `Java` • `SQL` • `Spring Boot` • `FastAPI` • `Pydantic` • `Playwright` • `pytest` • `SQLite` • `pandas` • `Allure` • `GitHub Actions` • `Docker`
+### Learning & Direction
 
-
-### 📚 Parallel Learning Track
-
-While my main focus is building agentic and AI-driven systems, I also maintain a 📘 [Coursework Archive](https://github.com/Coursework-Archive) to support continuous learning and skill development.
-<!-- COURSEWORK-START -->
-| Track | Last Activity |
-|-------|---------------|
-| [math-through-code](https://github.com/Coursework-Archive/math-through-code) | ![Last Commit](https://img.shields.io/github/last-commit/Coursework-Archive/math-through-code?label=last%20commit&style=flat-square) |
-<!-- COURSEWORK-END -->
-
-💡 Coursework is version-controlled and archived for reference at [@Coursework-Archive](https://github.com/Coursework-Archive).
-
----
-
-
-<!--
-**Br111t/Br111t** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+Continuing mathematics and computer science education, with an emphasis on connecting mathematical foundations to efficient, reliable intelligent systems. Committed to curiosity, integrity, thoughtful collaboration, and inclusive engineering.
