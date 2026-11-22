@@ -8,11 +8,9 @@
 
 ### About
 
-Systems thinker and Software Engineer at **Wells Fargo**, focused on recognizing patterns, dependencies, and edge cases—and turning complex problems into reliable, efficient systems.
+Building systems. Exploring intelligence. Challenging computational assumptions.
 
-Engineering experience spans Python, Java, enterprise automation, data validation, and software reliability. Independent research explores **computational efficiency, abstraction-driven model design, representation learning, and generalization**.
-
-> **Research question:** Can more capable intelligence emerge through better abstractions, efficient representations, and iterative reasoning rather than simply scaling computation?
+Independent experiments in small language models, mathematical computing, and software reliability—with a focus on achieving more through better design rather than greater scale.
 
 ### Current Research & Projects
 
@@ -20,15 +18,3 @@ Engineering experience spans Python, Java, enterprise automation, data validatio
 - **[Math Through Code](https://github.com/Coursework-Archive/math-through-code)** — UC Berkeley Extension calculus coursework, computational notebooks, mathematical references, and a reusable Python math library.
 - **[Agentic AI Coursework](https://github.com/Coursework-Archive/agentic-ai-coursework)** — Hands-on work in LLM evaluation, agentic workflows, FastAPI, and Python.
 - **[Agent-Ops](https://github.com/Br111t/agent-ops)** — Repository-aware AI evaluation and reliability tooling for test evidence, failure classification, and human-reviewed recommendations.
-
-### Technical Foundations
-
-**AI & evaluation:** Small language models, PyTorch, Transformers, grounded QA, experimental design, behavioral validation, human-in-the-loop evaluation
-
-**Software & data:** Python, Java, SQL, JavaScript, TypeScript, FastAPI, Spring Boot, SQLite, pandas
-
-**Reliability & architecture:** Playwright, pytest, Pydantic, Allure, CI/CD, automation, failure analysis
-
-### Learning & Direction
-
-Continuing mathematics and computer science education, with an emphasis on connecting mathematical foundations to efficient, reliable intelligent systems. Committed to curiosity, integrity, thoughtful collaboration, and inclusive engineering.
