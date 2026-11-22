@@ -12,9 +12,8 @@ Building systems. Exploring intelligence. Challenging computational assumptions.
 
 Independent experiments in small language models, mathematical computing, and software reliability—with a focus on achieving more through better design rather than greater scale.
 
+> **Research question:** Can more capable intelligence emerge through better abstractions, efficient representations, and iterative reasoning rather than simply scaling computation?
+
 ### Current Research & Projects
 
-- **Grounded-QA** *(independent research; repository currently private)* — Small Python/PyTorch language models trained from scratch to investigate evidence-grounded question answering, answerability, generalization, and architectural trade-offs. Research is experimental, using narrow synthetic datasets rather than broad capability benchmarks.
-- **[Math Through Code](https://github.com/Coursework-Archive/math-through-code)** — UC Berkeley Extension calculus coursework, computational notebooks, mathematical references, and a reusable Python math library.
-- **[Agentic AI Coursework](https://github.com/Coursework-Archive/agentic-ai-coursework)** — Hands-on work in LLM evaluation, agentic workflows, FastAPI, and Python.
-- **[Agent-Ops](https://github.com/Br111t/agent-ops)** — Repository-aware AI evaluation and reliability tooling for test evidence, failure classification, and human-reviewed recommendations.
+Explore the pinned repositories below for experiments, coursework, and engineering projects.
