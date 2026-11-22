@@ -16,4 +16,7 @@ Independent experiments in small language models, mathematical computing, and so
 
 ### Current Research & Projects
 
-Explore the pinned repositories below for experiments, coursework, and engineering projects.
+- **Grounded-QA** *(independent research)* — Small Python/PyTorch language models trained from scratch to investigate evidence-grounded question answering, answerability, generalization, and architectural trade-offs. Research is experimental, using narrow synthetic datasets rather than broad capability benchmarks.
+- **Math Through Code** — UC Berkeley Extension calculus coursework, computational notebooks, mathematical references, and a reusable Python math library.
+- **Agentic AI Coursework** — Hands-on work in LLM evaluation, agentic workflows, FastAPI, and Python.
+- **Agent-Ops** — Repository-aware AI evaluation and reliability tooling for test evidence, failure classification, and human-reviewed recommendations.
